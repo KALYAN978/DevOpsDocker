@@ -1,0 +1,256 @@
+What location are the files related to the docker containers and images stored?
+
+
+$ docker images
+REPOSITORY                      TAG       IMAGE ID       CREATED        SIZE
+redis                           latest    eca1379fe8b5   6 months ago   117MB
+mysql                           latest    8189e588b0e8   6 months ago   564MB
+nginx                           latest    6efc10a0510f   6 months ago   142MB
+postgres                        latest    ceccf204404e   6 months ago   379MB
+nginx                           alpine    8e75cbc5b25c   7 months ago   41MB
+alpine                          latest    9ed4aefc74f6   7 months ago   7.04MB
+ubuntu                          latest    08d22c0ceb15   8 months ago   77.8MB
+kodekloud/simple-webapp-mysql   latest    129dd9f67367   5 years ago    96.6MB
+kodekloud/simple-webapp         latest    c6e3cd9aae36   5 years ago    84.8MB
+$ docker inspect image redis
+[
+    {
+        "Id": "sha256:eca1379fe8b541831fd5ce4a252c263db0cef4efbfd428a94225dc020aaeb1af",
+        "RepoTags": [
+            "redis:latest"
+        ],
+        "RepoDigests": [
+            "redis@sha256:f50031a49f41e493087fb95f96fdb3523bb25dcf6a3f0b07c588ad3cdbe1d0aa"
+        ],
+        "Parent": "",
+        "Comment": "",
+        "Created": "2023-04-17T22:51:03.809495302Z",
+        "Container": "95874f7c47137e6a113189130d2d5b256cf92e343f795cdfae5ca2757fd226ee",
+        "ContainerConfig": {
+            "Hostname": "95874f7c4713",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "6379/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "GOSU_VERSION=1.16",
+                "REDIS_VERSION=7.0.11",
+                "REDIS_DOWNLOAD_URL=http://download.redis.io/releases/redis-7.0.11.tar.gz",
+                "REDIS_DOWNLOAD_SHA=ce250d1fba042c613de38a15d40889b78f7cb6d5461a27e35017ba39b07221e3"
+            ],
+            "Cmd": [
+                "/bin/sh",
+                "-c",
+                "#(nop) ",
+                "CMD [\"redis-server\"]"
+            ],
+            "Image": "sha256:ce9f3ac833fecacc6c805eb86934bfc69d02137b37e604cfe433600301570b91",
+            "Volumes": {
+                "/data": {}
+            },
+            "WorkingDir": "/data",
+            "Entrypoint": [
+                "docker-entrypoint.sh"
+            ],
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "DockerVersion": "20.10.23",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "6379/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "GOSU_VERSION=1.16",
+                "REDIS_VERSION=7.0.11",
+                "REDIS_DOWNLOAD_URL=http://download.redis.io/releases/redis-7.0.11.tar.gz",
+                "REDIS_DOWNLOAD_SHA=ce250d1fba042c613de38a15d40889b78f7cb6d5461a27e35017ba39b07221e3"
+            ],
+            "Cmd": [
+                "redis-server"
+            ],
+            "Image": "sha256:ce9f3ac833fecacc6c805eb86934bfc69d02137b37e604cfe433600301570b91",
+            "Volumes": {
+                "/data": {}
+            },
+            "WorkingDir": "/data",
+            "Entrypoint": [
+                "docker-entrypoint.sh"
+            ],
+            "OnBuild": null,
+            "Labels": null
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 117112566,
+        "VirtualSize": 117112566,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/3cd7e50bd001b7f79f974095e38b9569191d795c288a255a037458ee9ec98f9a/diff:/var/lib/docker/overlay2/9f33d46ad763fda85163a31dd1305cd212ea5eb0017f211fe0abe157a2f9346e/diff:/var/lib/docker/overlay2/0ab396f89a2bf1cbd7c2738669733d3fd7398f82f27ea6de1d48221ae39f0cab/diff:/var/lib/docker/overlay2/69ea7976dc8320516fdd8de4d8bb145e1b8474972dd36914113e5ae8334b60af/diff:/var/lib/docker/overlay2/21f8c9187f80bd3bb975064b98f51835a7bfeb47792fee9dba928aac78635d30/diff",
+                "MergedDir": "/var/lib/docker/overlay2/4c0a034e21e28a636486538c731f9ce76dc2df7e60e42e3b09b79b314d06c0f4/merged",
+                "UpperDir": "/var/lib/docker/overlay2/4c0a034e21e28a636486538c731f9ce76dc2df7e60e42e3b09b79b314d06c0f4/diff",
+                "WorkDir": "/var/lib/docker/overlay2/4c0a034e21e28a636486538c731f9ce76dc2df7e60e42e3b09b79b314d06c0f4/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:ed7b0ef3bf5bbec74379c3ae3d5339e666a314223e863c70644f7522a7527461",
+                "sha256:c9b92e80437fb3db0c5f6567dd8d937f40503c8bd7f5850e48a2d6af29607410",
+                "sha256:38d961800af4f70b4be204d2c67894f140a7c9e7181fe4b9e30a053ff831240d",
+                "sha256:848d877a872fe7d71425314c068bb4f95bfbfd84ec2b56a1f42e2251df1e126e",
+                "sha256:fe17aed102c4fe62747e23bc7cccf1493b07a2bf7fadec0ebfcfa22ededa4266",
+                "sha256:7e85dfd8ef0c1fb2dec36b11b5346816afabd26a5d2aa0138efc2d69df9abf39"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "0001-01-01T00:00:00Z"
+        }
+    }
+]
+Error: No such object: image
+$ 
+
+=======================================================================================================
+
+What directory under /var/lib/docker are the files related to the container alpine-3 image stored?
+
+
+$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND     CREATED         STATUS                     PORTS     NAMES
+f29f75f1e0dc   alpine    "/bin/sh"   2 minutes ago   Exited (0) 2 minutes ago             alpine-3
+875be31b65ee   alpine    "/bin/sh"   2 minutes ago   Exited (0) 2 minutes ago             alpine-2
+bc22d28d48f6   alpine    "/bin/sh"   2 minutes ago   Exited (0) 2 minutes ago             alpine-1
+$ ^C
+
+
+====================================================================================================
+
+Run a mysql container named mysql-db using the mysql image. Set database password to db_pass123
+Note: Remember to run it in the detached mode.
+
+
+$ docker run -d --name mysql-db -e MYSQL_ROOT_PASSWORD=db_pass123 mysql
+a772948b57be3189b0525d075fac4a71165648c6aebe1f9198e3bd72fd8af547
+$ ^C
+
+==============================================================================================
+
+We have just written some data into the database. To view the information we wrote, run the get-data.sh script available in the /root directory. How many customers data have been written to the database?
+Command: sh get-data.sh
+
+
+
+$ sh get-data.sh
+mysql: [Warning] Using a password on the command line interface can be insecure.
+id      Name    Phone   Email
+1       Kareem  130-5655        Duis.volutpat.nunc@quamCurabitur.org
+2       Ruby    1-584-149-0770  Nulla.tempor@vitaeorciPhasellus.org
+3       Rowan   199-8663        consectetuer.adipiscing.elit@Sedmalesuada.co.uk
+4       Alisa   220-6017        elementum.sem.vitae@enimMauris.edu
+5       Ella    731-0337        fermentum@nec.net
+6       Tiger   658-4480        quis.diam@odiovelest.net
+7       Felix   1-274-848-3378  Mauris.vel@arcu.com
+8       Karina  1-390-796-3451  sagittis.semper@odioapurus.co.uk
+9       Davis   605-8539        venenatis.vel@risusDonecnibh.com
+10      Mohammad        1-590-174-1489  ornare.sagittis.felis@natoque.ca
+11      Zane    362-1770        Aenean.euismod@condimentum.co.uk
+12      Piper   1-231-386-6903  nunc.sed.pede@nascetur.ca
+13      Marshall        1-383-729-4990  Cras.interdum.Nunc@neceuismod.ca
+14      Zena    241-6641        Fusce.mollis.Duis@lobortis.org
+15      Abdul   1-748-387-9935  eget.lacus.Mauris@Crasvehicula.com
+16      Chase   1-401-241-9169  ante.dictum.mi@nascetur.org
+17      Zahir   921-0663        non@nonummyutmolestie.edu
+18      Brenda  1-691-909-5827  Quisque.ac@magnaCras.co.uk
+19      Laura   1-562-983-9565  Quisque.ornare.tortor@sollicitudinadipiscing.ca
+20      Madison 1-348-737-0587  Quisque.varius@Intinciduntcongue.org
+21      Tanek   991-6278        dignissim.magna@Pellentesqueutipsum.net
+22      Dakota  893-0792        Nullam.enim.Sed@nulla.net
+23      Boris   1-297-302-5792  non.sollicitudin@eleifendegestasSed.co.uk
+24      Celeste 723-6729        mauris.rhoncus@eunulla.edu
+25      Connor  1-203-901-7531  et@loremipsumsodales.edu
+26      Perry   1-756-607-9187  eros.turpis@tristiquepharetra.co.uk
+27      Hayfa   1-609-407-3019  non.lobortis.quis@malesuadafringilla.net
+28      Todd    343-0454        id.erat@arcu.org
+29      Fuller  881-7273        non.feugiat.nec@adipiscingelit.net
+30      Rama    1-927-605-0610  nonummy.ultricies.ornare@malesuada.co.uk
+$ 
+
+======================================================================================================
+
+Run a mysql container again, but this time map a volume to the container so that the data stored by the container is stored at /opt/data on the host.
+
+Use the same name : mysql-db and same password: db_pass123 as before. Mysql stores data at /var/lib/mysql inside the container.
+
+
+
+$ docker run -d --name=mysql-db -e MYSQL_ROOT_PASSWORD=db_pass123 -v /opt/data:/var/lib/mysql mysql
+8a0826bd76484a81f414ece4bb0a85ed2b23793af50be4ca0b08845d10181e23
+$ 
+
+====================================================================================================
+We have now re-written data again. Run the get-data.sh script to ensure data is present.
+
+
+Command: sh get-data.sh
+
+
+$ sh get-data.sh
+mysql: [Warning] Using a password on the command line interface can be insecure.
+id      Name    Phone   Email
+1       Kareem  130-5655        Duis.volutpat.nunc@quamCurabitur.org
+2       Ruby    1-584-149-0770  Nulla.tempor@vitaeorciPhasellus.org
+3       Rowan   199-8663        consectetuer.adipiscing.elit@Sedmalesuada.co.uk
+4       Alisa   220-6017        elementum.sem.vitae@enimMauris.edu
+5       Ella    731-0337        fermentum@nec.net
+6       Tiger   658-4480        quis.diam@odiovelest.net
+7       Felix   1-274-848-3378  Mauris.vel@arcu.com
+8       Karina  1-390-796-3451  sagittis.semper@odioapurus.co.uk
+9       Davis   605-8539        venenatis.vel@risusDonecnibh.com
+10      Mohammad        1-590-174-1489  ornare.sagittis.felis@natoque.ca
+11      Zane    362-1770        Aenean.euismod@condimentum.co.uk
+12      Piper   1-231-386-6903  nunc.sed.pede@nascetur.ca
+13      Marshall        1-383-729-4990  Cras.interdum.Nunc@neceuismod.ca
+14      Zena    241-6641        Fusce.mollis.Duis@lobortis.org
+15      Abdul   1-748-387-9935  eget.lacus.Mauris@Crasvehicula.com
+16      Chase   1-401-241-9169  ante.dictum.mi@nascetur.org
+17      Zahir   921-0663        non@nonummyutmolestie.edu
+18      Brenda  1-691-909-5827  Quisque.ac@magnaCras.co.uk
+19      Laura   1-562-983-9565  Quisque.ornare.tortor@sollicitudinadipiscing.ca
+20      Madison 1-348-737-0587  Quisque.varius@Intinciduntcongue.org
+21      Tanek   991-6278        dignissim.magna@Pellentesqueutipsum.net
+22      Dakota  893-0792        Nullam.enim.Sed@nulla.net
+23      Boris   1-297-302-5792  non.sollicitudin@eleifendegestasSed.co.uk
+24      Celeste 723-6729        mauris.rhoncus@eunulla.edu
+25      Connor  1-203-901-7531  et@loremipsumsodales.edu
+26      Perry   1-756-607-9187  eros.turpis@tristiquepharetra.co.uk
+27      Hayfa   1-609-407-3019  non.lobortis.quis@malesuadafringilla.net
+28      Todd    343-0454        id.erat@arcu.org
+29      Fuller  881-7273        non.feugiat.nec@adipiscingelit.net
+30      Rama    1-927-605-0610  nonummy.ultricies.ornare@malesuada.co.uk
+$ 
+
+===================================================================================================
+
