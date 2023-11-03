@@ -1,0 +1,260 @@
+Inspect the environment variables set on the running container and identify the value set to the APP_COLOR variable.
+
+
+$ docker inspect APP_COLOR
+[]
+Error: No such object: APP_COLOR
+$ docker ps
+CONTAINER ID   IMAGE                     COMMAND           CREATED          STATUS          PORTS      NAMES
+9fd8b3945db5   kodekloud/simple-webapp   "python app.py"   57 seconds ago   Up 56 seconds   8080/tcp   condescending_wozniak
+$ docker inspect 9fd8b39
+[
+    {
+        "Id": "9fd8b3945db56cd438ce6ce745fd9e5b1daaa745914c60993859dd9c78bc7468",
+        "Created": "2023-11-03T08:57:12.258367345Z",
+        "Path": "python",
+        "Args": [
+            "app.py"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 1219,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2023-11-03T08:57:12.760935302Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:c6e3cd9aae3645a98dd69c15b048614603efce6cda26c60f5f7e867ef68f729f",
+        "ResolvConfPath": "/var/lib/docker/containers/9fd8b3945db56cd438ce6ce745fd9e5b1daaa745914c60993859dd9c78bc7468/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/9fd8b3945db56cd438ce6ce745fd9e5b1daaa745914c60993859dd9c78bc7468/hostname",
+        "HostsPath": "/var/lib/docker/containers/9fd8b3945db56cd438ce6ce745fd9e5b1daaa745914c60993859dd9c78bc7468/hosts",
+        "LogPath": "/var/lib/docker/containers/9fd8b3945db56cd438ce6ce745fd9e5b1daaa745914c60993859dd9c78bc7468/9fd8b3945db56cd438ce6ce745fd9e5b1daaa745914c60993859dd9c78bc7468-json.log",
+        "Name": "/condescending_wozniak",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "default",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "host",
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "KernelMemory": 0,
+            "KernelMemoryTCP": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": false,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/7aed8f450aec39b1159f421c86c9f2d12c1c53b8118af556c22831795cb98dca-init/diff:/var/lib/docker/overlay2/009a4658f99085f09f8b4657086b3db457b62c4fb6ccdb0da2d9e6557f9a5780/diff:/var/lib/docker/overlay2/b2feabc65b4665d946750c72164d84a10a46262bbf9593cb115035e5b23d9c8c/diff:/var/lib/docker/overlay2/d88063b12719f039c423a30b5d48389831d9bbc10ae67a7c4363fd39221e324e/diff:/var/lib/docker/overlay2/44028c86ccd32ce29e1ba42a17b6a62c49636cc30522be9f640acbecae40e286/diff:/var/lib/docker/overlay2/1e3d9b662653e0b63032f3011d96c87f5ccb838eb314335fdee04ad6a7975a75/diff:/var/lib/docker/overlay2/cffd17e9af7ffe676424f81dd8e4aaae8bc6b0045d2fda32b2871c25d954ed0e/diff:/var/lib/docker/overlay2/7a98e284a33d9e53c5fbe93c268b78f98c908782514b11939aa254c7c8cb29f5/diff",
+                "MergedDir": "/var/lib/docker/overlay2/7aed8f450aec39b1159f421c86c9f2d12c1c53b8118af556c22831795cb98dca/merged",
+                "UpperDir": "/var/lib/docker/overlay2/7aed8f450aec39b1159f421c86c9f2d12c1c53b8118af556c22831795cb98dca/diff",
+                "WorkDir": "/var/lib/docker/overlay2/7aed8f450aec39b1159f421c86c9f2d12c1c53b8118af556c22831795cb98dca/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [],
+        "Config": {
+            "Hostname": "9fd8b3945db5",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "8080/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "APP_COLOR=pink",
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=C.UTF-8",
+                "GPG_KEY=0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D",
+                "PYTHON_VERSION=3.6.6",
+                "PYTHON_PIP_VERSION=18.1"
+            ],
+            "Cmd": null,
+            "Image": "kodekloud/simple-webapp",
+            "Volumes": null,
+            "WorkingDir": "/opt",
+            "Entrypoint": [
+                "python",
+                "app.py"
+            ],
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "196ad68fb5b3246e7f6ec9d30d32cbe67e73b01ff3388b3db1674db2a80051b8",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {
+                "8080/tcp": null
+            },
+            "SandboxKey": "/var/run/docker/netns/196ad68fb5b3",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "88ea9804fc866d9021e5a0559976a14d411ee9c7cbd86df754fefc33ab51033e",
+            "Gateway": "172.12.0.1",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "172.12.0.2",
+            "IPPrefixLen": 24,
+            "IPv6Gateway": "",
+            "MacAddress": "02:42:ac:0c:00:02",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "83268505bf4b564037ad35b4b1413caf62dbd8df913557ec1a862dab74b52dd2",
+                    "EndpointID": "88ea9804fc866d9021e5a0559976a14d411ee9c7cbd86df754fefc33ab51033e",
+                    "Gateway": "172.12.0.1",
+                    "IPAddress": "172.12.0.2",
+                    "IPPrefixLen": 24,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:0c:00:02",
+                    "DriverOpts": null
+                }
+            }
+        }
+    }
+]
+$ 
+
+======================================================================================================
+
+
+Run a container named blue-app using image kodekloud/simple-webapp and set the environment variable APP_COLOR to blue. Make the application available on port 38282 on the host. The application listens on port 8080.
+
+
+
+$ docker run -p 38282:8080 --name blue-app -e APP_COLOR=blue -d kodekloud/simple-webapp
+a36916b855b8c98e89b827127e57ea0184920612771af9b9c77eefb2c2182e8e
+$ 
+
+
+==========================================================================================================
+
+
+Deploy a mysql database using the mysql image and name it mysql-db.
+Set the database password to use db_pass123. Lookup the mysql image on Docker Hub and identify the correct environment variable to use for setting the root password.
+
+
+$ docker run -p 38282:8080 --name blue-app -e APP_COLOR=blue -d kodekloud/simple-webapp
+a36916b855b8c98e89b827127e57ea0184920612771af9b9c77eefb2c2182e8e
+$ 
+$ 
+$ docker run -d -e MYSQL_ROOT_PASSWORD=db_pass123 --name mysql-db mysql
+4419221b29f69483707d2de38ae013d614fbd378d948f2c6ca59c1a96f112bee
+$ docker exec -it mysql-db env 
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+HOSTNAME=4419221b29f6
+TERM=xterm
+MYSQL_ROOT_PASSWORD=db_pass123
+GOSU_VERSION=1.16
+MYSQL_MAJOR=8.0
+MYSQL_VERSION=8.0.33-1.el8
+MYSQL_SHELL_VERSION=8.0.33-1.el8
+HOME=/root
+$ 
+
+=====================================================================================================
+
