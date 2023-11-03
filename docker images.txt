@@ -1,0 +1,453 @@
+How many images are available on this host?
+
+$ docker images
+REPOSITORY                      TAG       IMAGE ID       CREATED        SIZE
+redis                           latest    eca1379fe8b5   6 months ago   117MB
+mysql                           latest    8189e588b0e8   6 months ago   564MB
+nginx                           latest    6efc10a0510f   6 months ago   142MB
+postgres                        latest    ceccf204404e   6 months ago   379MB
+nginx                           alpine    8e75cbc5b25c   7 months ago   41MB
+alpine                          latest    9ed4aefc74f6   7 months ago   7.04MB
+ubuntu                          latest    08d22c0ceb15   8 months ago   77.8MB
+kodekloud/simple-webapp-mysql   latest    129dd9f67367   5 years ago    96.6MB
+kodekloud/simple-webapp         latest    c6e3cd9aae36   5 years ago    84.8MB
+$ 
+
+
+=================================================================================================
+What is the size of the ubuntu image?
+
+
+$ docker images
+REPOSITORY                      TAG       IMAGE ID       CREATED        SIZE
+redis                           latest    eca1379fe8b5   6 months ago   117MB
+mysql                           latest    8189e588b0e8   6 months ago   564MB
+nginx                           latest    6efc10a0510f   6 months ago   142MB
+postgres                        latest    ceccf204404e   6 months ago   379MB
+nginx                           alpine    8e75cbc5b25c   7 months ago   41MB
+alpine                          latest    9ed4aefc74f6   7 months ago   7.04MB
+ubuntu                          latest    08d22c0ceb15   8 months ago   77.8MB
+kodekloud/simple-webapp-mysql   latest    129dd9f67367   5 years ago    96.6MB
+kodekloud/simple-webapp         latest    c6e3cd9aae36   5 years ago    84.8MB
+$ 
+=====================================================================================================
+
+We just pulled a new image. What is the tag on the newly pulled NGINX image?
+
+
+$ docker images
+REPOSITORY                      TAG           IMAGE ID       CREATED        SIZE
+redis                           latest        eca1379fe8b5   6 months ago   117MB
+mysql                           latest        8189e588b0e8   6 months ago   564MB
+nginx                           latest        6efc10a0510f   6 months ago   142MB
+postgres                        latest        ceccf204404e   6 months ago   379MB
+nginx                           alpine        8e75cbc5b25c   7 months ago   41MB
+alpine                          latest        9ed4aefc74f6   7 months ago   7.04MB
+ubuntu                          latest        08d22c0ceb15   8 months ago   77.8MB
+nginx                           1.14-alpine   8a2fb25a19f5   4 years ago    16MB
+kodekloud/simple-webapp-mysql   latest        129dd9f67367   5 years ago    96.6MB
+kodekloud/simple-webapp         latest        c6e3cd9aae36   5 years ago    84.8MB
+$ 
+
+=======================================================================================================
+
+We just downloaded the code of an application. What is the base image used in the Dockerfile?
+Inspect the Dockerfile in the webapp-color directory
+
+
+$ docker images
+REPOSITORY                      TAG           IMAGE ID       CREATED        SIZE
+redis                           latest        eca1379fe8b5   6 months ago   117MB
+mysql                           latest        8189e588b0e8   6 months ago   564MB
+nginx                           latest        6efc10a0510f   6 months ago   142MB
+postgres                        latest        ceccf204404e   6 months ago   379MB
+nginx                           alpine        8e75cbc5b25c   7 months ago   41MB
+alpine                          latest        9ed4aefc74f6   7 months ago   7.04MB
+ubuntu                          latest        08d22c0ceb15   8 months ago   77.8MB
+nginx                           1.14-alpine   8a2fb25a19f5   4 years ago    16MB
+kodekloud/simple-webapp-mysql   latest        129dd9f67367   5 years ago    96.6MB
+kodekloud/simple-webapp         latest        c6e3cd9aae36   5 years ago    84.8MB
+$ vi /root/webapp-color/Dockerfile
+$ 
+
+===============================================================================================
+
+To what location within the container is the application code copied to during a Docker build?
+Inspect the Dockerfile in the webapp-color directory.
+
+
+$ vi /root/webapp-color/Dockerfile
+$ 
+
+=============================================================================================
+
+When a container is created using the image built with this Dockerfile, what is the command used to RUN the application inside it.
+Inspect the Dockerfile in the webapp-color directory.
+
+
+FROM python:3.6
+  
+RUN pip install flask
+
+COPY . /opt/
+
+EXPOSE 8080
+
+WORKDIR /opt
+
+ENTRYPOINT ["python", "app.py"]
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+"~/webapp-color/Dockerfile" 11L, 113C
+
+vi /root/webapp-color/Dockerfile
+
+=======================================================================================================
+Build a docker image using the Dockerfile and name it webapp-color. No tag to be specified.
+
+
+
+
+$ cd /root/webapp-color/
+$ pwd
+/root/webapp-color
+$ docker build -t webapp-color .
+Sending build context to Docker daemon  125.4kB
+Step 1/6 : FROM python:3.6
+3.6: Pulling from library/python
+0e29546d541c: Pull complete 
+9b829c73b52b: Pull complete 
+cb5b7ae36172: Pull complete 
+6494e4811622: Pull complete 
+6f9f74896dfa: Pull complete 
+5e3b1213efc5: Pull complete 
+9fddfdc56334: Pull complete 
+404f02044bac: Pull complete 
+c4f42be2be53: Pull complete 
+Digest: sha256:f8652afaf88c25f0d22354d547d892591067aa4026a7fa9a6819df9f300af6fc
+Status: Downloaded newer image for python:3.6
+ ---> 54260638d07c
+Step 2/6 : RUN pip install flask
+ ---> Running in c43779743dc9
+Collecting flask
+  Downloading Flask-2.0.3-py3-none-any.whl (95 kB)
+Collecting itsdangerous>=2.0
+  Downloading itsdangerous-2.0.1-py3-none-any.whl (18 kB)
+Collecting Jinja2>=3.0
+  Downloading Jinja2-3.0.3-py3-none-any.whl (133 kB)
+Collecting click>=7.1.2
+  Downloading click-8.0.4-py3-none-any.whl (97 kB)
+Collecting Werkzeug>=2.0
+  Downloading Werkzeug-2.0.3-py3-none-any.whl (289 kB)
+Collecting importlib-metadata
+  Downloading importlib_metadata-4.8.3-py3-none-any.whl (17 kB)
+Collecting MarkupSafe>=2.0
+  Downloading MarkupSafe-2.0.1-cp36-cp36m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (30 kB)
+Collecting dataclasses
+  Downloading dataclasses-0.8-py3-none-any.whl (19 kB)
+Collecting zipp>=0.5
+  Downloading zipp-3.6.0-py3-none-any.whl (5.3 kB)
+Collecting typing-extensions>=3.6.4
+  Downloading typing_extensions-4.1.1-py3-none-any.whl (26 kB)
+Installing collected packages: zipp, typing-extensions, MarkupSafe, importlib-metadata, dataclasses, Werkzeug, Jinja2, itsdangerous, click, flask
+Successfully installed Jinja2-3.0.3 MarkupSafe-2.0.1 Werkzeug-2.0.3 click-8.0.4 dataclasses-0.8 flask-2.0.3 importlib-metadata-4.8.3 itsdangerous-2.0.1 typing-extensions-4.1.1 zipp-3.6.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+WARNING: You are using pip version 21.2.4; however, version 21.3.1 is available.
+You should consider upgrading via the '/usr/local/bin/python -m pip install --upgrade pip' command.
+Removing intermediate container c43779743dc9
+ ---> edcb45c6fe40
+Step 3/6 : COPY . /opt/
+ ---> 0d20997b6cac
+Step 4/6 : EXPOSE 8080
+ ---> Running in ee17485f8af1
+Removing intermediate container ee17485f8af1
+ ---> 52fe51ffaa83
+Step 5/6 : WORKDIR /opt
+ ---> Running in 8e6f8fb670dc
+Removing intermediate container 8e6f8fb670dc
+ ---> e91850a54b7a
+Step 6/6 : ENTRYPOINT ["python", "app.py"]
+ ---> Running in 2a67e0d69a41
+Removing intermediate container 2a67e0d69a41
+ ---> d436f2352ad3
+Successfully built d436f2352ad3
+Successfully tagged webapp-color:latest
+$ 
+
+=========================================================================================================
+Run an instance of the image webapp-color and publish port 8080 on the container to 8282 on the host.
+
+
+
+$ docker run -d -p 8282:8080 webapp-color
+ea5207f40ee8219977254f6a7c9cd08e10f5d444d28666d6b5bf34851660670f
+$ 
+
+==========================================================================================================
+Access the application by clicking on the tab named HOST:8282 above your terminal.
+After you are done, you may stop the running container by hitting CTRL + C if you wish to.
+
+
+$ docker build -t webapp-color .
+Sending build context to Docker daemon  125.4kB
+Step 1/6 : FROM python:3.6
+3.6: Pulling from library/python
+0e29546d541c: Pull complete 
+9b829c73b52b: Pull complete 
+cb5b7ae36172: Pull complete 
+6494e4811622: Pull complete 
+6f9f74896dfa: Pull complete 
+5e3b1213efc5: Pull complete 
+9fddfdc56334: Pull complete 
+404f02044bac: Pull complete 
+c4f42be2be53: Pull complete 
+Digest: sha256:f8652afaf88c25f0d22354d547d892591067aa4026a7fa9a6819df9f300af6fc
+Status: Downloaded newer image for python:3.6
+ ---> 54260638d07c
+Step 2/6 : RUN pip install flask
+ ---> Running in c43779743dc9
+Collecting flask
+  Downloading Flask-2.0.3-py3-none-any.whl (95 kB)
+Collecting itsdangerous>=2.0
+  Downloading itsdangerous-2.0.1-py3-none-any.whl (18 kB)
+Collecting Jinja2>=3.0
+  Downloading Jinja2-3.0.3-py3-none-any.whl (133 kB)
+Collecting click>=7.1.2
+  Downloading click-8.0.4-py3-none-any.whl (97 kB)
+Collecting Werkzeug>=2.0
+  Downloading Werkzeug-2.0.3-py3-none-any.whl (289 kB)
+Collecting importlib-metadata
+  Downloading importlib_metadata-4.8.3-py3-none-any.whl (17 kB)
+Collecting MarkupSafe>=2.0
+  Downloading MarkupSafe-2.0.1-cp36-cp36m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (30 kB)
+Collecting dataclasses
+  Downloading dataclasses-0.8-py3-none-any.whl (19 kB)
+Collecting zipp>=0.5
+  Downloading zipp-3.6.0-py3-none-any.whl (5.3 kB)
+Collecting typing-extensions>=3.6.4
+  Downloading typing_extensions-4.1.1-py3-none-any.whl (26 kB)
+Installing collected packages: zipp, typing-extensions, MarkupSafe, importlib-metadata, dataclasses, Werkzeug, Jinja2, itsdangerous, click, flask
+Successfully installed Jinja2-3.0.3 MarkupSafe-2.0.1 Werkzeug-2.0.3 click-8.0.4 dataclasses-0.8 flask-2.0.3 importlib-metadata-4.8.3 itsdangerous-2.0.1 typing-extensions-4.1.1 zipp-3.6.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+WARNING: You are using pip version 21.2.4; however, version 21.3.1 is available.
+You should consider upgrading via the '/usr/local/bin/python -m pip install --upgrade pip' command.
+Removing intermediate container c43779743dc9
+ ---> edcb45c6fe40
+Step 3/6 : COPY . /opt/
+ ---> 0d20997b6cac
+Step 4/6 : EXPOSE 8080
+ ---> Running in ee17485f8af1
+Removing intermediate container ee17485f8af1
+ ---> 52fe51ffaa83
+Step 5/6 : WORKDIR /opt
+ ---> Running in 8e6f8fb670dc
+Removing intermediate container 8e6f8fb670dc
+ ---> e91850a54b7a
+Step 6/6 : ENTRYPOINT ["python", "app.py"]
+ ---> Running in 2a67e0d69a41
+Removing intermediate container 2a67e0d69a41
+ ---> d436f2352ad3
+Successfully built d436f2352ad3
+Successfully tagged webapp-color:latest
+$ 
+$ docker run -d -p 8282:8080 webapp-color
+ea5207f40ee8219977254f6a7c9cd08e10f5d444d28666d6b5bf34851660670f
+$ 
+$ docker inspect python:3.6
+[
+    {
+        "Id": "sha256:54260638d07c5e3ad24c6e21fc889abbc8486a27634c0892086ff71f3f44b104",
+        "RepoTags": [
+            "python:3.6"
+        ],
+        "RepoDigests": [
+            "python@sha256:f8652afaf88c25f0d22354d547d892591067aa4026a7fa9a6819df9f300af6fc"
+        ],
+        "Parent": "",
+        "Comment": "",
+        "Created": "2021-12-21T12:04:32.060662995Z",
+        "Container": "935a2a69737e23abbaf953f50a3d601203e99b8efa69b762701f30133871f600",
+        "ContainerConfig": {
+            "Hostname": "935a2a69737e",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=C.UTF-8",
+                "GPG_KEY=0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D",
+                "PYTHON_VERSION=3.6.15",
+                "PYTHON_PIP_VERSION=21.2.4",
+                "PYTHON_SETUPTOOLS_VERSION=57.5.0",
+                "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/3cb8888cc2869620f57d5d2da64da38f516078c7/public/get-pip.py",
+                "PYTHON_GET_PIP_SHA256=c518250e91a70d7b20cceb15272209a4ded2a0c263ae5776f129e0d9b5674309"
+            ],
+            "Cmd": [
+                "/bin/sh",
+                "-c",
+                "#(nop) ",
+                "CMD [\"python3\"]"
+            ],
+            "Image": "sha256:d4d737e99aa0a93ead84046b66b3218fc89c845ed9d101e9121a0a609233854e",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "DockerVersion": "20.10.7",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=C.UTF-8",
+                "GPG_KEY=0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D",
+                "PYTHON_VERSION=3.6.15",
+                "PYTHON_PIP_VERSION=21.2.4",
+                "PYTHON_SETUPTOOLS_VERSION=57.5.0",
+                "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/3cb8888cc2869620f57d5d2da64da38f516078c7/public/get-pip.py",
+                "PYTHON_GET_PIP_SHA256=c518250e91a70d7b20cceb15272209a4ded2a0c263ae5776f129e0d9b5674309"
+            ],
+            "Cmd": [
+                "python3"
+            ],
+            "Image": "sha256:d4d737e99aa0a93ead84046b66b3218fc89c845ed9d101e9121a0a609233854e",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": null
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 901657498,
+        "VirtualSize": 901657498,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/5c0bb75f593c3230444b50de40ea48a057d3ca10f81040fb18ac8586436b2e6c/diff:/var/lib/docker/overlay2/2f8de10c882676d4704ce29f406e630a0521fc0ef9d71be5b580787ca3d3c305/diff:/var/lib/docker/overlay2/f085717309f2df2da9f2c612e933fe11ad93ff5f174636fd5a666b350d3d8ca3/diff:/var/lib/docker/overlay2/c246f2fddd10e670c251a18a1b457130232abcec169165e957f6921620044524/diff:/var/lib/docker/overlay2/8503734ad078b8097d039258c5e17a0f49df8476306641678193548d6ecde6e3/diff:/var/lib/docker/overlay2/70ca4648095bedd737c81d7c358388e78f1009a2f1d4d6106fbb240b42cf254f/diff:/var/lib/docker/overlay2/1aa44518e94b3e02c720a3ea21568a96570d8e12927a860caaf7aa826015f822/diff:/var/lib/docker/overlay2/22c7b35bd0490dbcdf0545446c80b05a7e2bd128fbc042fc120c8589a939ec80/diff",
+                "MergedDir": "/var/lib/docker/overlay2/6520815e815773fcad62436167629d710f1da67df261b1afb6ca80210edbdab3/merged",
+                "UpperDir": "/var/lib/docker/overlay2/6520815e815773fcad62436167629d710f1da67df261b1afb6ca80210edbdab3/diff",
+                "WorkDir": "/var/lib/docker/overlay2/6520815e815773fcad62436167629d710f1da67df261b1afb6ca80210edbdab3/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:11936051f93baf5a4fb090a8fa0999309b8173556f7826598e235e8a82127bce",
+                "sha256:31892cc314cb1993ba1b8eb5f3002c4e9f099a9237af0d03d1893c6fcc559aab",
+                "sha256:8bf42db0de72f74f4ef0c1d1743f5d54efc3491ee38f4af6d914a6032148b78e",
+                "sha256:26a504e63be4c63395f216d70b1b8af52263a5289908df8e96a0e7c840813adc",
+                "sha256:c3a0d593ed24e738aec3b1e61662f696311ae99941c45c78d281ebc3732bdcb0",
+                "sha256:1e18e7e1fcc24ce3ca682c184fa27c1c240d18d1c456d593acc95758b92c404f",
+                "sha256:3e607d59ef9f20681f8b995bffdf17269bac7d057fe76f20c9ff6ce70dc0604e",
+                "sha256:8ba9f690e8ba0f49322cce69e0daa2a92993c24f26d3d1816ba621e47352be62",
+                "sha256:aa4c808c19f68799c8171deec506a25717fe1e9c460c3747b6fa978679867655"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "0001-01-01T00:00:00Z"
+        }
+    }
+]
+$ docker run python:3.6 cat /etc/*release*
+PRETTY_NAME="Debian GNU/Linux 11 (bullseye)"
+NAME="Debian GNU/Linux"
+VERSION_ID="11"
+VERSION="11 (bullseye)"
+VERSION_CODENAME=bullseye
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
+$ 
+
+================================================================================================
+
+What is the approximate size of the webapp-color image?
+
+$ docker images
+REPOSITORY                      TAG           IMAGE ID       CREATED         SIZE
+webapp-color                    latest        d436f2352ad3   9 minutes ago   913MB
+redis                           latest        eca1379fe8b5   6 months ago    117MB
+mysql                           latest        8189e588b0e8   6 months ago    564MB
+nginx                           latest        6efc10a0510f   6 months ago    142MB
+postgres                        latest        ceccf204404e   6 months ago    379MB
+nginx                           alpine        8e75cbc5b25c   7 months ago    41MB
+alpine                          latest        9ed4aefc74f6   7 months ago    7.04MB
+ubuntu                          latest        08d22c0ceb15   8 months ago    77.8MB
+python                          3.6           54260638d07c   22 months ago   902MB
+nginx                           1.14-alpine   8a2fb25a19f5   4 years ago     16MB
+kodekloud/simple-webapp-mysql   latest        129dd9f67367   5 years ago     96.6MB
+kodekloud/simple-webapp         latest        c6e3cd9aae36   5 years ago     84.8MB
+$ ^C
+$ 
+
+===============================================================================================
+
+Build a new smaller docker image by modifying the same Dockerfile and name it webapp-color and tag it lite.
+Hint: Find a smaller base image for python:3.6. Make sure the final image is less than 150MB.
+
+
+$ docker run -d --name webapp-color:lite
+"docker run" requires at least 1 argument.
+See 'docker run --help'.
+
+Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+Run a command in a new container
+$ docker run -d --name webapp-color kodekloud/simple-webapp:lite 
+Unable to find image 'kodekloud/simple-webapp:lite' locally
+docker: Error response from daemon: manifest for kodekloud/simple-webapp:lite not found: manifest unknown: manifest unknown.
+See 'docker run --help'.
+$ docker build -t webapp-color:lite
+"docker build" requires exactly 1 argument.
+See 'docker build --help'.
+
+Usage:  docker build [OPTIONS] PATH | URL | -
+
+Build an image from a Dockerfile
+$ 
+$ 
+$ cd /root/webapp-color/
+$ pwd
+/root/webapp-color
+$ ls -l
+total 16
+-rw-r--r-- 1 root root  113 Nov  3 08:29 Dockerfile
+-rw-r--r-- 1 root root 2259 Nov  3 08:21 app.py
+-rw-r--r-- 1 root root    5 Nov  3 08:21 requirements.txt
+drwxr-xr-x 2 root root 4096 Nov  3 08:21 templates
+$ docker build -t webapp-color:lite
+"docker build" requires exactly 1 argument.
+See 'docker build --help'.
+
+Usage:  docker build [OPTIONS] PATH | URL | -
+
+Build an image from a Dockerfile
+$ vi Dockerfile
+$ 
