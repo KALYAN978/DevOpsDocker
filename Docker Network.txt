@@ -1,0 +1,326 @@
+Explore the current setup and identify the number of networks that exist on this system.
+
+
+$ docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+6c039b3dbf93   bridge    bridge    local
+e1bd4eeb89ea   host      host      local
+cc017d20d8c9   none      null      local
+$ 
+
+=================================================================================================
+id of bridge network
+
+
+$ docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+6c039b3dbf93   bridge    bridge    local
+e1bd4eeb89ea   host      host      local
+cc017d20d8c9   none      null      local
+$ 
+
+===============================================================================================
+
+We just ran a container named alpine-1. Identify the network it is attached to.
+
+
+$ docker inspect alpine-1
+[
+    {
+        "Id": "d38da8a3fec3cba0fd812b047463a4a1fa024af35a6320f4dc4588142a4e68ef",
+        "Created": "2023-11-03T10:27:19.668281042Z",
+        "Path": "sleep",
+        "Args": [
+            "1000"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 1743,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2023-11-03T10:27:20.375919646Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:9ed4aefc74f6792b5a804d1d146fe4b4a2299147b0f50eaf2b08435d7b38c27e",
+        "ResolvConfPath": "/var/lib/docker/containers/d38da8a3fec3cba0fd812b047463a4a1fa024af35a6320f4dc4588142a4e68ef/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/d38da8a3fec3cba0fd812b047463a4a1fa024af35a6320f4dc4588142a4e68ef/hostname",
+        "HostsPath": "/var/lib/docker/containers/d38da8a3fec3cba0fd812b047463a4a1fa024af35a6320f4dc4588142a4e68ef/hosts",
+        "LogPath": "/var/lib/docker/containers/d38da8a3fec3cba0fd812b047463a4a1fa024af35a6320f4dc4588142a4e68ef/d38da8a3fec3cba0fd812b047463a4a1fa024af35a6320f4dc4588142a4e68ef-json.log",
+        "Name": "/alpine-1",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "host",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "host",
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "KernelMemory": 0,
+            "KernelMemoryTCP": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": false,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/0909c0655ce31cf0c6ac8e802cbe52293148d61be88c20ab58c9ae5cc9e84e2a-init/diff:/var/lib/docker/overlay2/dee44972369fd13b70e758e8b987b71d6437c89ba439800f462da8fab9bf76f7/diff",
+                "MergedDir": "/var/lib/docker/overlay2/0909c0655ce31cf0c6ac8e802cbe52293148d61be88c20ab58c9ae5cc9e84e2a/merged",
+                "UpperDir": "/var/lib/docker/overlay2/0909c0655ce31cf0c6ac8e802cbe52293148d61be88c20ab58c9ae5cc9e84e2a/diff",
+                "WorkDir": "/var/lib/docker/overlay2/0909c0655ce31cf0c6ac8e802cbe52293148d61be88c20ab58c9ae5cc9e84e2a/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [],
+        "Config": {
+            "Hostname": "controlplane",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "sleep",
+                "1000"
+            ],
+            "Image": "alpine",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "6e50d5e7e9cd63d2723e40ce4f9b172a4f35d91b61b45683c141df4d3360f95e",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {},
+            "SandboxKey": "/var/run/docker/netns/default",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "",
+            "Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "MacAddress": "",
+            "Networks": {
+                "host": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "e1bd4eeb89ea00d56f811c10a01bc5a672bcf1487b483acee53a406886b29b21",
+                    "EndpointID": "9b667fa2a38ed984e727a32235273ba949f02fc62589c4e7d09046698a47fc9c",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "",
+                    "DriverOpts": null
+                }
+            }
+        }
+    }
+]
+$ 
+
+
+========================================================================================================
+What is the subnet configured on bridge network?
+
+
+$ docker inspect network bridge
+[
+    {
+        "Name": "bridge",
+        "Id": "6c039b3dbf93affd548f552df1e269705064c759c28789106aa643832a18dc2d",
+        "Created": "2023-11-03T10:13:44.921343358Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.12.0.0/24",
+                    "Gateway": "172.12.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {
+            "com.docker.network.bridge.default_bridge": "true",
+            "com.docker.network.bridge.enable_icc": "true",
+            "com.docker.network.bridge.enable_ip_masquerade": "true",
+            "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
+            "com.docker.network.bridge.name": "docker0",
+            "com.docker.network.driver.mtu": "1500"
+        },
+        "Labels": {}
+    }
+]
+Error: No such object: network
+$ docker network inspect bridge                   
+[
+    {
+        "Name": "bridge",
+        "Id": "6c039b3dbf93affd548f552df1e269705064c759c28789106aa643832a18dc2d",
+        "Created": "2023-11-03T10:13:44.921343358Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.12.0.0/24",
+                    "Gateway": "172.12.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {
+            "com.docker.network.bridge.default_bridge": "true",
+            "com.docker.network.bridge.enable_icc": "true",
+            "com.docker.network.bridge.enable_ip_masquerade": "true",
+            "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
+            "com.docker.network.bridge.name": "docker0",
+            "com.docker.network.driver.mtu": "1500"
+        },
+        "Labels": {}
+    }
+]
+$ 
+
+===================================================================================================
+
+Run a container named alpine-2 using the alpine image and attach it to the none network.
+
+
+$ docker run -d --name alpine-2 --network=none alpine
+b8d5461d8548240f1cadb913bf6ebe6271e4f895df072c7bc8a4f1f6efad8202
+$ 
+
+
+================================================================================================
+
+
+
