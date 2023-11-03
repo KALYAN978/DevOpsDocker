@@ -1,0 +1,232 @@
+What is the ENTRYPOINT configured on the mysql image?
+
+
+$ docker inspect mysql
+[
+    {
+        "Id": "sha256:8189e588b0e8fcc95b0d764d6f7bdb55b5b41e9249157177d73781058f603ca9",
+        "RepoTags": [
+            "mysql:latest"
+        ],
+        "RepoDigests": [
+            "mysql@sha256:a43f6e7e7f3a5e5b90f857fbed4e3103ece771b19f0f75880f767cf66bbb6577"
+        ],
+        "Parent": "",
+        "Comment": "",
+        "Created": "2023-04-17T22:44:34.355739397Z",
+        "Container": "db0ba2fb381c74e14582cb626356296fbbf0d15050d5bdca800997ab3e1b3a03",
+        "ContainerConfig": {
+            "Hostname": "db0ba2fb381c",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "3306/tcp": {},
+                "33060/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "GOSU_VERSION=1.16",
+                "MYSQL_MAJOR=8.0",
+                "MYSQL_VERSION=8.0.33-1.el8",
+                "MYSQL_SHELL_VERSION=8.0.33-1.el8"
+            ],
+            "Cmd": [
+                "/bin/sh",
+                "-c",
+                "#(nop) ",
+                "CMD [\"mysqld\"]"
+            ],
+            "Image": "sha256:1f10aaca62c2186ddfbf9785965cecb9f615894286ae6fcb185c7a8e2dbe6194",
+            "Volumes": {
+                "/var/lib/mysql": {}
+            },
+            "WorkingDir": "",
+            "Entrypoint": [
+                "docker-entrypoint.sh"
+            ],
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "DockerVersion": "20.10.23",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "3306/tcp": {},
+                "33060/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "GOSU_VERSION=1.16",
+                "MYSQL_MAJOR=8.0",
+                "MYSQL_VERSION=8.0.33-1.el8",
+                "MYSQL_SHELL_VERSION=8.0.33-1.el8"
+            ],
+            "Cmd": [
+                "mysqld"
+            ],
+            "Image": "sha256:1f10aaca62c2186ddfbf9785965cecb9f615894286ae6fcb185c7a8e2dbe6194",
+            "Volumes": {
+                "/var/lib/mysql": {}
+            },
+            "WorkingDir": "",
+            "Entrypoint": [
+                "docker-entrypoint.sh"
+            ],
+            "OnBuild": null,
+            "Labels": null
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 564325637,
+        "VirtualSize": 564325637,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/fc7f0de3ce832420e8b287e28ea105cec76c613820045c5487c24ed7150fda3a/diff:/var/lib/docker/overlay2/81cdd3010649c2aa9a2e56b36e56e61b22652292dca4ac50c0b4187f7a826450/diff:/var/lib/docker/overlay2/7ce415171362e6f6b24e2299b12660ee6523ff5dd14e31570763dca210094135/diff:/var/lib/docker/overlay2/ab303b6daabf82562438fd54e39999b2d35d95af01caef3de713ac2b206cbc68/diff:/var/lib/docker/overlay2/0a9a1066b62c12254bbf44f66f3e0d4f9c62f9cda6dba0bab23bf1eb0fef0042/diff:/var/lib/docker/overlay2/4bd0b1e52ad38c6eb44d99cce8a216a00f814f12a63dc2b263e9e693ddeb3090/diff:/var/lib/docker/overlay2/7f18a511b09180201afa16fa28b07aecff8147d604b8d960e10bd1230df9cef2/diff:/var/lib/docker/overlay2/2d1139ffc9f81dea3a04eeb53fc8cb72c9eb2b23d19ae7dc721de383f67af429/diff:/var/lib/docker/overlay2/3cf4e8770efe6c0d5248672f1e0aa934d117993090a600f714cb0b87f5ff38ce/diff:/var/lib/docker/overlay2/1d889304a9781dfd184203db4ccb8d68d1e4ff450e3faa5ab3256d41b8696cdd/diff",
+                "MergedDir": "/var/lib/docker/overlay2/b317ba70b35b9ff46b79878859e4a892ba7a8afb2d8aafc31eb920a25cb9cbfe/merged",
+                "UpperDir": "/var/lib/docker/overlay2/b317ba70b35b9ff46b79878859e4a892ba7a8afb2d8aafc31eb920a25cb9cbfe/diff",
+                "WorkDir": "/var/lib/docker/overlay2/b317ba70b35b9ff46b79878859e4a892ba7a8afb2d8aafc31eb920a25cb9cbfe/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:caefa4e45110eab274ebbdbc781f9227229f947f8718cee62ebeff1aac8f1d5b",
+                "sha256:5ed69eb31cd773570fc2cdad9c6224f65db7475b3ca8d22e70c8ab24f7c5005c",
+                "sha256:a9805d41c46adbdef5a8b43096d0928f57c30687950ad0a80ce317190abd1c05",
+                "sha256:3f772020efc1dbae8c80a4bb7597c3952991b73cc8c7c9cd1467ba5a323684a3",
+                "sha256:08745f0c18ca985883f4099696bd2499179aeb221275647d0bf5ed8c475b7bbb",
+                "sha256:1c585189e67fdc2030c09ab748ad5fab930ca32eade2a28a290f3b17b35e32f7",
+                "sha256:bd6b6a89e10a7cdc0eef1d4a90db1afd39a647aa075c92f595164eaf2069935f",
+                "sha256:82a375517098b527686d74ce3e158e77deb7accde153ca19dd2207d9b14b5058",
+                "sha256:44eaf2264b913c20d7732546a815a86f802a8be8ab2bcb357962f70798f65fc9",
+                "sha256:ac2f3d433b8e30367e3bed5c72cd5fdd0422b2a5bcff0f0a95571459ce9b425a",
+                "sha256:a4f094a199131314e86227d611298d820819bea9c70c8c78166c0f3bf147e212"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "0001-01-01T00:00:00Z"
+        }
+    }
+]
+$ 
+
+=======================================================================================================
+$ docker inspect wordpress
+[]
+Error: No such object: wordpress
+$ docker images
+REPOSITORY                      TAG       IMAGE ID       CREATED        SIZE
+redis                           latest    eca1379fe8b5   6 months ago   117MB
+mysql                           latest    8189e588b0e8   6 months ago   564MB
+nginx                           latest    6efc10a0510f   6 months ago   142MB
+postgres                        latest    ceccf204404e   6 months ago   379MB
+nginx                           alpine    8e75cbc5b25c   7 months ago   41MB
+alpine                          latest    9ed4aefc74f6   7 months ago   7.04MB
+ubuntu                          latest    08d22c0ceb15   8 months ago   77.8MB
+kodekloud/simple-webapp-mysql   latest    129dd9f67367   5 years ago    96.6MB
+kodekloud/simple-webapp         latest    c6e3cd9aae36   5 years ago    84.8MB
+$ /root/Dockerfile-wordpress
+-bash: /root/Dockerfile-wordpress: Permission denied
+$ docker run -d wordpress
+Unable to find image 'wordpress:latest' locally
+latest: Pulling from library/wordpress
+0bc8ff246cb8: Pull complete 
+6450c8e22862: Pull complete 
+67202b5712dc: Pull complete 
+296e480d34df: Pull complete 
+2eda4d478e98: Pull complete 
+ef28c0608bd5: Pull complete 
+41e60e5acc0c: Pull complete 
+52a466685717: Pull complete 
+035408df74c4: Pull complete 
+59874af597ed: Pull complete 
+8bec4d11c750: Pull complete 
+d977868bfb2d: Pull complete 
+0261d3a57bb7: Pull complete 
+14b986fa4fae: Pull complete 
+b06710174a63: Pull complete 
+08b7a85690d7: Pull complete 
+03f6e9715a42: Pull complete 
+1d9c12479402: Pull complete 
+59bea5d8bdb6: Pull complete 
+6a25381c5656: Pull complete 
+b074563f9bc5: Pull complete 
+Digest: sha256:4489b1be8e185b7c98c6b32afc6a903673c077b433377e3e38400eadf37028d4
+Status: Downloaded newer image for wordpress:latest
+0d0cdb87c8f28cc169bc2f3904a22639165b46d74e0bab7c6a4c60b3926f2a86
+$ cat Dockerfile-wordpress | grep CMD
+CMD ["apache2-foreground"]
+$ 
+
+
+=======================================================================================================
+
+What is the final command run at startup when the wordpress image is run. Consider both ENTRYPOINT and CMD instructions
+
+ $ /root/Dockerfile-wordpress
+-bash: /root/Dockerfile-wordpress: Permission denied
+$ vi /root/Docekerfile-wordpress
+$ vi /root/Docekerfile-wordpress
+$ 
+
+=========================================================================================================
+
+What is the command run at startup when the ubuntu image is run?
+
+
+#
+# Ubuntu Dockerfile
+#
+# https://github.com/dockerfile/ubuntu
+#
+
+# Pull base image.
+FROM ubuntu:14.04
+
+# Install.
+RUN \
+  sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
+  apt-get update && \
+  apt-get -y upgrade && \
+  apt-get install -y build-essential && \
+  apt-get install -y software-properties-common && \
+  apt-get install -y byobu curl git htop man unzip vim wget && \
+  rm -rf /var/lib/apt/lists/*
+
+# Add files.
+ADD root/.bashrc /root/.bashrc
+ADD root/.gitconfig /root/.gitconfig
+ADD root/.scripts /root/.scripts
+
+$ vi /root/Dockerfile-ubuntu
+
+
+====================================================================================================
+
+Run an instance of the ubuntu image to run the sleep 1000 command at startup.
+Run it in detached mode.
+
+
+$ 
+$ docker run -d ubuntu sleep 1000
+dcd7c77f772f51b0da4b5ebe2a781a9205d8951a3c88c0e55c128644adcb8edf
+$ 
+
+=====================================================================================================
+
