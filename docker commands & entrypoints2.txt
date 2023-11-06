@@ -1,0 +1,109 @@
+Dockerfiles for a few commonly used Docker Images are given in the /root (current) directory. Inspect them and try to answer the following questions.
+
+
+
+What is the ENTRYPOINT configured on the mysql image?
+
+vi /root/Dockerfile-mysql
+
+
+================================================================================================
+
+What is the CMD configured on the wordpress image?
+
+
+
+
+RUN a2enmod rewrite expires
+
+VOLUME /var/www/html
+
+ENV WORDPRESS_VERSION 5.2.2
+ENV WORDPRESS_SHA1 3605bcbe9ea48d714efa59b0eb2d251657e7d5b0
+
+RUN set -ex; \
+        curl -o wordpress.tar.gz -fSL "https://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz"; \
+        echo "$WORDPRESS_SHA1 *wordpress.tar.gz" | sha1sum -c -; \
+# upstream tarballs include ./wordpress/ so this gives us /usr/src/wordpress
+        tar -xzf wordpress.tar.gz -C /usr/src/; \
+        rm wordpress.tar.gz; \
+        chown -R www-data:www-data /usr/src/wordpress
+
+COPY docker-entrypoint.sh /usr/local/bin/
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["apache2-foreground"]
+
+=====================================================================================================
+
+What is the final command run at startup when the wordpress image is run. Consider both ENTRYPOINT and CMD instructions
+
+
+
+
+       } > /usr/local/etc/php/conf.d/error-logging.ini
+
+RUN a2enmod rewrite expires
+
+VOLUME /var/www/html
+
+ENV WORDPRESS_VERSION 5.2.2
+ENV WORDPRESS_SHA1 3605bcbe9ea48d714efa59b0eb2d251657e7d5b0
+
+RUN set -ex; \
+        curl -o wordpress.tar.gz -fSL "https://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz"; \
+        echo "$WORDPRESS_SHA1 *wordpress.tar.gz" | sha1sum -c -; \
+# upstream tarballs include ./wordpress/ so this gives us /usr/src/wordpress
+        tar -xzf wordpress.tar.gz -C /usr/src/; \
+        rm wordpress.tar.gz; \
+        chown -R www-data:www-data /usr/src/wordpress
+
+COPY docker-entrypoint.sh /usr/local/bin/
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["apache2-foreground"]
+
+==================================================================================================
+
+
+What is the command run at startup when the ubuntu image is run?
+
+
+# Install.
+RUN \
+  sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
+  apt-get update && \
+  apt-get -y upgrade && \
+  apt-get install -y build-essential && \
+  apt-get install -y software-properties-common && \
+  apt-get install -y byobu curl git htop man unzip vim wget && \
+  rm -rf /var/lib/apt/lists/*
+
+# Add files.
+ADD root/.bashrc /root/.bashrc
+ADD root/.gitconfig /root/.gitconfig
+ADD root/.scripts /root/.scripts
+
+# Set environment variables.
+ENV HOME /root
+
+# Define working directory.
+WORKDIR /root
+
+# Define default command.
+CMD ["bash"]
+
+=====================================================================================================
+
+
+Run an instance of the ubuntu image to run the sleep 1000 command at startup.
+Run it in detached mode.
+
+
+$ docker run -d ubuntu sleep 1000
+5a36777910df50408e5b8a3611dd70855474fec875c0cce6e5e353a5eae5ca27
+$ 
+
+
+===================================================================================================
+

@@ -1,0 +1,138 @@
+First create a redis database container called redis, image redis:alpine.
+
+
+$ docker run -d --name redis redis:alpine
+Unable to find image 'redis:alpine' locally
+alpine: Pulling from library/redis
+96526aa774ef: Pull complete 
+fc3c83ac3e8a: Pull complete 
+c9fc243a9236: Pull complete 
+0ba583e26254: Pull complete 
+467dd97fc629: Pull complete 
+4f4fb700ef54: Pull complete 
+53620e1784ca: Pull complete 
+Digest: sha256:5482672695b73780afeddb2ee84d58f393f16f34718d76b246c76afe27465d4c
+Status: Downloaded newer image for redis:alpine
+508acc59c341c42d5853e65807256c75110bc78a4399613c8bc33b6c3c0ef418
+$ 
+
+====================================================================================================
+
+Next, create a simple container called clickcounter with the image kodekloud/click-counter, link it to the redis container that we created in the previous task and then expose it on the host port 8085
+The clickcounter app run on port 5000.
+
+
+
+$ 
+$ docker run -d --name=clickcounter --link redis:redis -p 8085:5000 kodekloud/click-counter
+Unable to find image 'kodekloud/click-counter:latest' locally
+latest: Pulling from kodekloud/click-counter
+540db60ca938: Pull complete 
+a7ad1a75a999: Pull complete 
+37ce6546d5dd: Pull complete 
+ec9e91bed5a2: Pull complete 
+767433e10bb0: Pull complete 
+156f0b0493cb: Pull complete 
+3fe82d8a2401: Pull complete 
+4a41f7c94204: Pull complete 
+473063430a4f: Pull complete 
+452c68a16ccd: Pull complete 
+Digest: sha256:530e4532a718e8f5cbda05844a6c0638ebe8898fa4c4307ee6afbdd5d1f213db
+Status: Downloaded newer image for kodekloud/click-counter:latest
+1541f3b378e1d1e5367100d85bf62771189a53999de1cfe7bb433cb012c72c51
+$ 
+
+====================================================================================================
+
+Let's clean up the actions carried out in previous steps. Delete the redis and the clickcounter containers.
+
+
+
+$        
+$ 
+$ docker images
+REPOSITORY                      TAG       IMAGE ID       CREATED        SIZE
+redis                           alpine    3c8161452cbb   4 days ago     43.4MB
+redis                           latest    eca1379fe8b5   6 months ago   117MB
+mysql                           latest    8189e588b0e8   6 months ago   564MB
+nginx                           latest    6efc10a0510f   6 months ago   142MB
+postgres                        latest    ceccf204404e   6 months ago   379MB
+nginx                           alpine    8e75cbc5b25c   7 months ago   41MB
+alpine                          latest    9ed4aefc74f6   7 months ago   7.04MB
+ubuntu                          latest    08d22c0ceb15   8 months ago   77.8MB
+kodekloud/click-counter         latest    72e102fd1a20   2 years ago    182MB
+kodekloud/simple-webapp-mysql   latest    129dd9f67367   5 years ago    96.6MB
+kodekloud/simple-webapp         latest    c6e3cd9aae36   5 years ago    84.8MB
+$ docker ps
+CONTAINER ID   IMAGE                     COMMAND                  CREATED              STATUS              PORTS                    NAMES
+1541f3b378e1   kodekloud/click-counter   "flask run"              About a minute ago   Up About a minute   0.0.0.0:8085->5000/tcp   clickcounter
+508acc59c341   redis:alpine              "docker-entrypoint.s…"   4 minutes ago        Up 4 minutes        6379/tcp                 redis
+$ docker stop clickcounter
+clickcounter
+$ docker rmi redis
+Untagged: redis:latest
+Untagged: redis@sha256:f50031a49f41e493087fb95f96fdb3523bb25dcf6a3f0b07c588ad3cdbe1d0aa
+Deleted: sha256:eca1379fe8b541831fd5ce4a252c263db0cef4efbfd428a94225dc020aaeb1af
+Deleted: sha256:21acda8c08f1a6109e2fb61ed010d368ee6581cf30128cdaab0e6b91dabffc22
+Deleted: sha256:aafc83c9f9299ba7a3af08ab0b1f822340278803714695fd2a96351fe89b37ea
+Deleted: sha256:644ab96acc6e4232dc7be6f1855b27f5f3534b17b9e9c19ae2557991b99487db
+Deleted: sha256:6e75f4867056adfca8dfafbb0e94a525064797e4f0a106bca817b5afce47af73
+Deleted: sha256:84e4c46eefa83bc327e4e356365ec03a3ee1f691d181235e5b69e36663f7dd57
+$ docker rm clickcounter
+clickcounter
+$ docker rmi redis
+Error: No such image: redis
+$ 
+
+==================================================================================================
+
+Create a docker-compose.yml file under the directory /root/clickcounter. Once done, run docker-compose up.
+
+
+The compose file should have the exact specification as follows -
+
+redis service specification - Image name should be redis:alpine.
+clickcounter service specification - Image name should be kodekloud/click-counter, app is run on port 5000 and expose it on the host port 8085 in the compose file.
+
+
+
+
+
+
+
+$ vi docker-compose.yml
+
+services:
+        redis:
+                image: redis:alpine
+        clickcouter:
+                image: kodekloud/click-counter
+                ports:
+                        - 8085:5000
+verison: '3.0'
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+"docker-compose.yml" 8L, 126C
+
+
+$ docker-compose up -d
+ERROR: yaml.scanner.ScannerError: while scanning for the next token
+found character '\t' that cannot start any token
+  in "./docker-compose.yml", line 2, column 1
+$ 
+
+
+==================================================================================================
