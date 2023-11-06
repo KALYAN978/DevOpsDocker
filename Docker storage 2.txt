@@ -1,0 +1,103 @@
+What location are the files related to the docker containers and images stored?
+
+What directory under /var/lib/docker are the files related to the container alpine-3 image stored?
+
+$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND     CREATED         STATUS                     PORTS     NAMES
+e31f4d677552   alpine    "/bin/sh"   3 minutes ago   Exited (0) 3 minutes ago             alpine-3
+3adc0d513dda   alpine    "/bin/sh"   3 minutes ago   Exited (0) 3 minutes ago             alpine-2
+090642ec4a9b   alpine    "/bin/sh"   3 minutes ago   Exited (0) 3 minutes ago             alpine-1
+
+===============================================================================
+
+Run a mysql container named mysql-db using the mysql image. Set database password to db_pass123
+
+
+Note: Remember to run it in the detached mode.
+
+
+
+$ 
+$ 
+$ docker run -d --name=mysql-db  -e MYSQL_ROOT_PASSWORD=db_pass123 mysql
+28dceca0b0ac12cd04657ee11ef37bd146f751fdad88b57fd287c6ca1dfaf0c8
+$ 
+
+
+==========================================================================
+\
+
+We have just written some data into the database. To view the information we wrote, run the get-data.sh script available in the /root directory. How many customers data have been written to the database?
+
+
+Command: sh get-data.sh
+
+
+
+$ sh get-data.sh
+mysql: [Warning] Using a password on the command line interface can be insecure.
+id      Name    Phone   Email
+1       Kareem  130-5655        Duis.volutpat.nunc@quamCurabitur.org
+2       Ruby    1-584-149-0770  Nulla.tempor@vitaeorciPhasellus.org
+3       Rowan   199-8663        consectetuer.adipiscing.elit@Sedmalesuada.co.uk
+4       Alisa   220-6017        elementum.sem.vitae@enimMauris.edu
+5       Ella    731-0337        fermentum@nec.net
+6       Tiger   658-4480        quis.diam@odiovelest.net
+7       Felix   1-274-848-3378  Mauris.vel@arcu.com
+8       Karina  1-390-796-3451  sagittis.semper@odioapurus.co.uk
+9       Davis   605-8539        venenatis.vel@risusDonecnibh.com
+10      Mohammad        1-590-174-1489  ornare.sagittis.felis@natoque.ca
+11      Zane    362-1770        Aenean.euismod@condimentum.co.uk
+12      Piper   1-231-386-6903  nunc.sed.pede@nascetur.ca
+13      Marshall        1-383-729-4990  Cras.interdum.Nunc@neceuismod.ca
+14      Zena    241-6641        Fusce.mollis.Duis@lobortis.org
+15      Abdul   1-748-387-9935  eget.lacus.Mauris@Crasvehicula.com
+16      Chase   1-401-241-9169  ante.dictum.mi@nascetur.org
+17      Zahir   921-0663        non@nonummyutmolestie.edu
+18      Brenda  1-691-909-5827  Quisque.ac@magnaCras.co.uk
+19      Laura   1-562-983-9565  Quisque.ornare.tortor@sollicitudinadipiscing.ca
+20      Madison 1-348-737-0587  Quisque.varius@Intinciduntcongue.org
+21      Tanek   991-6278        dignissim.magna@Pellentesqueutipsum.net
+22      Dakota  893-0792        Nullam.enim.Sed@nulla.net
+23      Boris   1-297-302-5792  non.sollicitudin@eleifendegestasSed.co.uk
+24      Celeste 723-6729        mauris.rhoncus@eunulla.edu
+25      Connor  1-203-901-7531  et@loremipsumsodales.edu
+26      Perry   1-756-607-9187  eros.turpis@tristiquepharetra.co.uk
+27      Hayfa   1-609-407-3019  non.lobortis.quis@malesuadafringilla.net
+28      Todd    343-0454        id.erat@arcu.org
+29      Fuller  881-7273        non.feugiat.nec@adipiscingelit.net
+30      Rama    1-927-605-0610  nonummy.ultricies.ornare@malesuada.co.uk
+$ 
+
+
+===========================================================================
+
+
+Run a mysql container again, but this time map a volume to the container so that the data stored by the container is stored at /opt/data on the host.
+
+
+Use the same name : mysql-db and same password: db_pass123 as before. Mysql stores data at /var/lib/mysql inside the container.
+
+
+
+$ docker run -d --name=mysql-db -e MYSQL_ROOT_PASSWORD=db_pass123 -v /opt/data:/var/lib/mysql mysql
+9ccd1bd65780d76d01076302eae60ca1eab410adf087aef89633bd8f98974863
+$ 
+
+=============================================================================
+
+Disaster strikes.. again! And the database crashed again. But this time we have the data stored at /opt/data directory. Re-deploy a new mysql instance using the same options as before.
+
+
+Just run the same command as before. Here it is for your convenience: docker run -v /opt/data:/var/lib/mysql -d --name mysql-db -e MYSQL_ROOT_PASSWORD=db_pass123 mysql
+
+
+
+$ 
+$ docker run -d --name=mysql-db  -e MYSQL_ROOT_PASSWORD=db_pass123 -v /opt/data:/var/lib/mysql mysql
+0a66af981d8f89dc44517c2038517259d0c2495a2707baba2f5a276bc11aed3e
+$ 
+
+================================================================================
+
+

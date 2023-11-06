@@ -1,0 +1,283 @@
+What is a Docker Registry?
+
+
+
+It is a storage and distribution system for named Docker images
+
+
+All of the options
+
+
+It is an alternative to code hosting platform for version control like Github, GitLab etc.
+
+
+It is a place to store Dockerfiles
+
+
+===========================================================================
+By default, the Docker engine interacts with ?
+
+
+
+
+
+On-premises Registry
+
+
+Azure Container Registry
+
+
+DockerHub
+
+
+Google Container Registry
+
+
+
+============================================================================
+
+
+
+Which command is used for Login to a self-hosted registry?
+
+
+
+docker login [SERVER]
+
+
+docker connect [SERVER]
+
+
+docker sign-in [SERVER]
+
+
+docker load [SERVER]
+
+=============================================================================
+
+Let practice deploying a registry server on our own.
+Run a registry server with name equals to my-registry using registry:2 image with host port set to 5000, and restart policy set to always.
+
+Note: Registry server is exposed on port 5000 in the image.
+
+
+Here we are hosting our own registry using the open source Docker Registry.
+
+CheckCompleteIncomplete
+
+
+
+
+
+                         
+$ docker run -d -p 5000:5000 --restart=always --name=myregistry registry:2
+Unable to find image 'registry:2' locally
+2: Pulling from library/registry
+96526aa774ef: Pull complete 
+834bccaa730c: Pull complete 
+87a69098c0a9: Pull complete 
+afc17120a9f7: Pull complete 
+e5ac04f3acf5: Pull complete 
+Digest: sha256:8a60daaa55ab0df4607c4d8625b96b97b06fd2e6ca8528275472963c4ae8afa0
+Status: Downloaded newer image for registry:2
+10ee2d7fe50aea4ab1f42a43014b6f52b4b1d204aa95e27434b7c38f5c8bb3ed
+$ 
+
+
+===========================================================================
+
+Now its time to push some images to our registry server. Let's push two images for now .i.e. nginx:latest and httpd:latest.
+Note: Don't forget to pull them first.
+To check the list of images pushed , use curl -X GET localhost:5000/v2/_catalog
+
+
+
+
+
+
+$ 
+$ docker pull nginx:latest
+latest: Pulling from library/nginx
+578acb154839: Pull complete 
+e398db710407: Pull complete 
+85c41ebe6d66: Pull complete 
+7170a263b582: Pull complete 
+8f28d06e2e2e: Pull complete 
+6f837de2f887: Pull complete 
+c1dfc7e1671e: Pull complete 
+Digest: sha256:86e53c4c16a6a276b204b0fd3a8143d86547c967dc8258b3d47c3a21bb68d3c6
+Status: Downloaded newer image for nginx:latest
+docker.io/library/nginx:latest
+$ docker pull httpd:latest
+latest: Pulling from library/httpd
+578acb154839: Already exists 
+c1a8c8567b78: Pull complete 
+10b9ab03bf45: Pull complete 
+74dbedf7ddc0: Pull complete 
+6a3b76b70f73: Pull complete 
+Digest: sha256:4e24356b4b0aa7a961e7dfb9e1e5025ca3874c532fa5d999f13f8fc33c09d1b7
+Status: Downloaded newer image for httpd:latest
+docker.io/library/httpd:latest
+$ 
+$ docker image tag nginx:latest localhost:5000/nginx:latest
+$ docker push localhost:5000/nginx:latest
+The push refers to repository [localhost:5000/nginx]
+505f49f13fbe: Pushed 
+9920f1ebf52b: Pushed 
+768e28a222fd: Pushed 
+715b32fa0f12: Pushed 
+e503754c9a26: Pushed 
+609f2a18d224: Pushed 
+ec983b166360: Pushed 
+latest: digest: sha256:d2e65182b5fd330470eca9b8e23e8a1a0d87cc9b820eb1fb3f034bf8248d37ee size: 1778
+$   
+$ 
+$ 
+$ docker image tag httpd:latest localhost:5000/httpd:latest
+$ docker push localhost:5000/httpd:latest
+The push refers to repository [localhost:5000/httpd]
+cdae29f197b2: Pushed 
+5ca84525a215: Pushed 
+e0ba343b5cab: Pushed 
+2905795cb5b8: Pushed 
+ec983b166360: Mounted from nginx 
+latest: digest: sha256:d70861224a52d0175c4b485ef7b70f56125f2c74d8a489a9a8ca10e3656929c9 size: 1366
+$ 
+
+===========================================================================
+
+
+Let's remove all the dangling images we have locally. Use docker image prune -a to remove them. How many images do we have now?
+
+
+Note: Make sure we don't have any running containers except our registry-sever.
+
+To get list of images use: docker image ls
+
+
+
+
+
+
+$ docker image prune -a
+WARNING! This will remove all images without at least one container associated to them.
+Are you sure you want to continue? [y/N] y
+Deleted Images:
+untagged: kodekloud/simple-webapp:latest
+untagged: kodekloud/simple-webapp@sha256:e5355b4c7804f453d79de75d6659ee702eeebbe30c02d9f1ce6602a96b576e57
+deleted: sha256:c6e3cd9aae3645a98dd69c15b048614603efce6cda26c60f5f7e867ef68f729f
+deleted: sha256:33833b97952fc68d999bc3bccaad23687ea6a939724e0130c151dc973ba8f2d3
+deleted: sha256:a3dd002bb33a1cdb83aface983ea0d268be1b4ffda0e42ce72aa5c22ced6701f
+deleted: sha256:12e8c893d121075ced84d32b967f6de75ff67e1cf7c9b66b63636bdf630ac12c
+deleted: sha256:4785d1dd03a24d6b30c9342db24ac2254d01362e7f3b3f28f55a00e4858f85e5
+deleted: sha256:9de207c08e3d729c3b9c451d87e109144cdc6e2e71f4fcad80c9cbf99879d8bb
+deleted: sha256:0a2679c979afc5eb30764613ae1fa22199b872610f709f556b9f35bc0717e3f1
+deleted: sha256:df64d3292fd6194b7865d7326af5255db6d81e9df29f48adde61a918fbd8c332
+untagged: nginx:latest
+untagged: nginx@sha256:86e53c4c16a6a276b204b0fd3a8143d86547c967dc8258b3d47c3a21bb68d3c6
+untagged: localhost:5000/nginx:latest
+untagged: localhost:5000/nginx@sha256:d2e65182b5fd330470eca9b8e23e8a1a0d87cc9b820eb1fb3f034bf8248d37ee
+deleted: sha256:c20060033e06f882b0fbe2db7d974d72e0887a3be5e554efdb0dcf8d53512647
+deleted: sha256:32cf0b3c70998330104acfc1a02f6aae2f8a728bc6ad91c2415fda501593fa81
+deleted: sha256:79cae367d5d42d54224c249db6a06234d077ea32168bed4261141c1016469623
+deleted: sha256:32b31b2b0563a28eb36f90bcd835540ead275b63cf48ed85e998a8df0b1845ff
+deleted: sha256:203226d708244adf6c392a28e22e3a7e276270da43094205137c404fc9949691
+deleted: sha256:9969d65d0618198425e0be29ec6194be71b36c856ce9fe2142dd54163aef6eae
+deleted: sha256:e9c1515f88f6e5652bde5583f0d1ddb7dd4097380aa66d90b722c53fbea3ebab
+untagged: alpine:latest
+untagged: alpine@sha256:124c7d2707904eea7431fffe91522a01e5a861a624ee31d03372cc1d138a3126
+deleted: sha256:9ed4aefc74f6792b5a804d1d146fe4b4a2299147b0f50eaf2b08435d7b38c27e
+deleted: sha256:f1417ff83b319fbdae6dd9cd6d8c9c88002dcd75ecf6ec201c8c6894681cf2b5
+untagged: httpd:latest
+untagged: httpd@sha256:4e24356b4b0aa7a961e7dfb9e1e5025ca3874c532fa5d999f13f8fc33c09d1b7
+untagged: localhost:5000/httpd:latest
+untagged: localhost:5000/httpd@sha256:d70861224a52d0175c4b485ef7b70f56125f2c74d8a489a9a8ca10e3656929c9
+deleted: sha256:7f6a969e81a54d01e2fc08fd45025badf8f2418d3530a3a484b77ab826a1b4a7
+deleted: sha256:2614dc9aa0cffd5daac73c3de1063e97361855f987cdfd0686a4b7826e1f5c3f
+deleted: sha256:622d66d1261fdda264c5638afdc9dd3079295b6e2b2507a27b65e15ab6f11eaa
+deleted: sha256:1e17a3fbfc9d0b752508a1490415e567d73315f7b2fe86b7b72e375cb4d894f4
+deleted: sha256:826b9d992d8f9a96b7bfa578a75d31f3b66936f12f81dfcfcde29d5b15ad01ac
+deleted: sha256:ec983b16636050e69677eb81537e955ab927757c23aaf73971ecf5f71fcc262a
+untagged: ubuntu:latest
+untagged: ubuntu@sha256:67211c14fa74f070d27cc59d69a7fa9aeff8e28ea118ef3babc295a0428a6d21
+deleted: sha256:08d22c0ceb150ddeb2237c5fa3129c0183f3cc6f5eeb2e7aa4016da3ad02140a
+deleted: sha256:b93c1bd012ab8fda60f5b4f5906bf244586e0e3292d84571d3abb56472248466
+untagged: mysql:latest
+untagged: mysql@sha256:a43f6e7e7f3a5e5b90f857fbed4e3103ece771b19f0f75880f767cf66bbb6577
+deleted: sha256:8189e588b0e8fcc95b0d764d6f7bdb55b5b41e9249157177d73781058f603ca9
+deleted: sha256:48c450c06ed83938e899fb0b77b2e9e35094015b503bb5e88de6c2d93f445241
+deleted: sha256:c5d77efb49ec3a7a74ab898b9da9217ec78fa9bee47018409025467611d60329
+deleted: sha256:de0c00e28b37cc33347f02709e0a6a2f17637b1e761fb96616861ed345bd34f6
+deleted: sha256:cc635684e233946f93fe008e0322c86e15cbb97b56c58d269a5f8f9da15d973d
+deleted: sha256:0b795b85d567512d79a544b1b74f21108339156cbbc78d16921e96a2a69f687b
+deleted: sha256:16e250c36f4c0e1085512653edd47fd03b60d230ddb575aabc8eb224d96e668f
+deleted: sha256:d023b92a46a5fa8fa8d54387e6d3cb0c73997fefc64ec9000eab0ee1c550ef45
+deleted: sha256:f1c1643119168a94089eab1c9126cda0ee6056a4bb4b18e27a7dcacdf4823972
+deleted: sha256:b147319dd21e8994e6d2fb3bb58a8278c5a72f39488e1f1cff94fc73f1089eb9
+deleted: sha256:ff7c2b28c0dfaa63d0d30b7a5069bf526b0f6492143110381351bbf7d07b4baf
+deleted: sha256:caefa4e45110eab274ebbdbc781f9227229f947f8718cee62ebeff1aac8f1d5b
+untagged: kodekloud/simple-webapp-mysql:latest
+untagged: kodekloud/simple-webapp-mysql@sha256:92943d2b3ea4a1db7c8a9529cd5786ae3b9999e0246ab665c29922e9800d1b41
+deleted: sha256:129dd9f673673e9e8507ac837dcd9eaa3906469c10ef4aa63d0cac1f1dfa6b3a
+deleted: sha256:07711c2005c750fa9c42f5667ec657d7f5126f710915cf917cf5c0e9e3871242
+deleted: sha256:69dbe0a61b055e5e63706bc76a875220e02769e880d1846c6f965c2f4b1b1dfe
+deleted: sha256:5978a6831cce81b23e657b11150010eb8acf463a183cbe540eb6c769314a0f8a
+deleted: sha256:93099f51e789a3d87e77501591ab260ca2ff9b8532a78f9fc6bebaa2d5ffcad4
+deleted: sha256:15df614f20bc13c6da75c43616dec28d17908970491a562820fabbc11a1e562c
+deleted: sha256:a8dc474c5cce41198ea9a334a54bd7d59043f86c32c3b8e3f0d76a52adf09cf2
+deleted: sha256:362e5432c5954e9f081657f369b00d821cecd10274b8885f1d6fd1b2e8c1a405
+deleted: sha256:73046094a9b835e443af1a9d736fcfc11a994107500e474d0abf399499ed280c
+untagged: postgres:latest
+untagged: postgres@sha256:6cc97262444f1c45171081bc5a1d4c28b883ea46a6e0d1a45a8eac4a7f4767ab
+deleted: sha256:ceccf204404e5efe764f2d4d97e6977db04062579d525d9cb445cf93e0f0fef4
+deleted: sha256:5581e2a0252cdb4f2b1847cfd9300122841787cd0a9ba13e095425b22c08bb05
+deleted: sha256:b8d9a959ce0f6039bf4061ddedb320c05b9b049b5bd8dabb2b5f9d697fdc4e0e
+deleted: sha256:d426781ae8413908a52d86fb8f28319b834625c5c6b194e3d122d1b1eb179d87
+deleted: sha256:ee6f16055bfd3ad8bcc92a9af3567c69c0bb499cbc2c2b9a2f2ccafa3538504b
+deleted: sha256:42c973890245849bff76e03def91ceacb87da92a19fa5aa7eab58975a811c683
+deleted: sha256:179015cc5c69fea24583ca7a52a8ba75dd363310d17461b6eb9b430c0d69a37e
+deleted: sha256:9362c3f758a9916eb7e2262af8e63d7f1b0a45818e7ac033c9152ecf049933d0
+deleted: sha256:b47ed6c8bc9fa1548ed586316aa7a0e27b34937efb1b3c4ad5742ae3a5d63f8c
+deleted: sha256:a603ddfeb1e19bb984a56b96e96cc987d8e27621390a9bc1b11f7003ff357e7d
+deleted: sha256:ca073f3da5fc959ed40fff93ae9a550ddb14916b3f8bd620235d306f5e9d3d64
+deleted: sha256:fd2d7bb88deba0351caf0ee032dac84272a04e489fd055407cddd740009e329c
+deleted: sha256:2c3cc0e91a94c04e5446f3a8061970073053850ce8093a46ba819b8e59af1dee
+untagged: redis:latest
+untagged: redis@sha256:f50031a49f41e493087fb95f96fdb3523bb25dcf6a3f0b07c588ad3cdbe1d0aa
+deleted: sha256:eca1379fe8b541831fd5ce4a252c263db0cef4efbfd428a94225dc020aaeb1af
+deleted: sha256:21acda8c08f1a6109e2fb61ed010d368ee6581cf30128cdaab0e6b91dabffc22
+deleted: sha256:aafc83c9f9299ba7a3af08ab0b1f822340278803714695fd2a96351fe89b37ea
+deleted: sha256:644ab96acc6e4232dc7be6f1855b27f5f3534b17b9e9c19ae2557991b99487db
+deleted: sha256:6e75f4867056adfca8dfafbb0e94a525064797e4f0a106bca817b5afce47af73
+deleted: sha256:84e4c46eefa83bc327e4e356365ec03a3ee1f691d181235e5b69e36663f7dd57
+deleted: sha256:ed7b0ef3bf5bbec74379c3ae3d5339e666a314223e863c70644f7522a7527461
+
+Total reclaimed space: 1.526GB
+$ docker image ls
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+registry     2         ff1857193a0b   2 weeks ago   25.4MB
+$ 
+
+============================================================================
+
+Let's clean up after ourselves.
+Stop and remove the my-registry containe
+
+
+
+
+$ 
+$ docker ps   
+CONTAINER ID   IMAGE        COMMAND                  CREATED          STATUS          PORTS                    NAMES
+10ee2d7fe50a   registry:2   "/entrypoint.sh /etc…"   13 minutes ago   Up 13 minutes   0.0.0.0:5000->5000/tcp   myregistry
+$ docker stop myregistry 
+myregistry
+$ docker rm myregistry
+myregistry
+$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+$ 
+
+===========================================================================
+
+
