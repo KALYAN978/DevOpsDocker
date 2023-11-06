@@ -1,0 +1,147 @@
+Inspect the environment variables set on the running container and identify the value set to the APP_COLOR variable.
+
+
+$ docker inspect kodekloud/simple-webapp
+[
+    {
+        "Id": "sha256:c6e3cd9aae3645a98dd69c15b048614603efce6cda26c60f5f7e867ef68f729f",
+        "RepoTags": [
+            "kodekloud/simple-webapp:latest"
+        ],
+        "RepoDigests": [
+            "kodekloud/simple-webapp@sha256:e5355b4c7804f453d79de75d6659ee702eeebbe30c02d9f1ce6602a96b576e57"
+        ],
+        "Parent": "",
+        "Comment": "",
+        "Created": "2018-10-17T04:41:16.789089597Z",
+        "Container": "595bf59c64fe0cb40cd5229b71c537e704e14a8a691c8fb493989bd9e6f7d767",
+        "ContainerConfig": {
+            "Hostname": "595bf59c64fe",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "8080/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=C.UTF-8",
+                "GPG_KEY=0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D",
+                "PYTHON_VERSION=3.6.6",
+                "PYTHON_PIP_VERSION=18.1"
+            ],
+            "Cmd": [
+                "/bin/sh",
+                "-c",
+                "#(nop) ",
+                "ENTRYPOINT [\"python\" \"app.py\"]"
+            ],
+            "ArgsEscaped": true,
+            "Image": "sha256:f12cec91fa57877c3bd8c81a778663ce7a62d516dd7c221522aee20df0dd397e",
+            "Volumes": null,
+            "WorkingDir": "/opt",
+            "Entrypoint": [
+                "python",
+                "app.py"
+            ],
+            "OnBuild": [],
+            "Labels": {}
+        },
+        "DockerVersion": "18.03.1-ee-3",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "8080/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=C.UTF-8",
+                "GPG_KEY=0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D",
+                "PYTHON_VERSION=3.6.6",
+                "PYTHON_PIP_VERSION=18.1"
+            ],
+            "Cmd": null,
+            "ArgsEscaped": true,
+            "Image": "sha256:f12cec91fa57877c3bd8c81a778663ce7a62d516dd7c221522aee20df0dd397e",
+            "Volumes": null,
+            "WorkingDir": "/opt",
+            "Entrypoint": [
+                "python",
+                "app.py"
+            ],
+            "OnBuild": [],
+            "Labels": null
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 84825977,
+        "VirtualSize": 84825977,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/b2feabc65b4665d946750c72164d84a10a46262bbf9593cb115035e5b23d9c8c/diff:/var/lib/docker/overlay2/d88063b12719f039c423a30b5d48389831d9bbc10ae67a7c4363fd39221e324e/diff:/var/lib/docker/overlay2/44028c86ccd32ce29e1ba42a17b6a62c49636cc30522be9f640acbecae40e286/diff:/var/lib/docker/overlay2/1e3d9b662653e0b63032f3011d96c87f5ccb838eb314335fdee04ad6a7975a75/diff:/var/lib/docker/overlay2/cffd17e9af7ffe676424f81dd8e4aaae8bc6b0045d2fda32b2871c25d954ed0e/diff:/var/lib/docker/overlay2/7a98e284a33d9e53c5fbe93c268b78f98c908782514b11939aa254c7c8cb29f5/diff",
+                "MergedDir": "/var/lib/docker/overlay2/009a4658f99085f09f8b4657086b3db457b62c4fb6ccdb0da2d9e6557f9a5780/merged",
+                "UpperDir": "/var/lib/docker/overlay2/009a4658f99085f09f8b4657086b3db457b62c4fb6ccdb0da2d9e6557f9a5780/diff",
+                "WorkDir": "/var/lib/docker/overlay2/009a4658f99085f09f8b4657086b3db457b62c4fb6ccdb0da2d9e6557f9a5780/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:df64d3292fd6194b7865d7326af5255db6d81e9df29f48adde61a918fbd8c332",
+                "sha256:beefb6beb20fa287cfcfaf083c0fda606f9c7f4b2830a286a50f1bbcacd52cf3",
+                "sha256:67f814cf21192da3612f5a368479dbd472e678fb06b7235e1f6b8e527ef2cd8c",
+                "sha256:b5e780333edd3de78d2ee5f32394a90355b3fa1ba46e69ac568a4d19e607c71c",
+                "sha256:4b38e856ea3dd2d3bdccca0b8453bd8905ddec8a41b963770180845220ad326a",
+                "sha256:2e9eac35d3839b276dd0699b1ff9c1389262da787869982e1c880549e492f9a1",
+                "sha256:fb68dea88d522808cb0f59197aa377c336e2e176f3ed392620d40850e3eb3082"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "0001-01-01T00:00:00Z"
+        }
+    }
+]
+$ 
+
+===========================================================================================================
+
+Run a container named blue-app using image kodekloud/simple-webapp and set the environment variable APP_COLOR to blue. Make the application available on port 38282 on the host. The application listens on port 8080.
+
+
+
+$ docker run -d --name=blue-app -e APP_COLOR=blue -p 38282:8080 kodekloud/simple-webapp
+0fb3c3ac519fe8ce19c58dd089f7e88a24ba665f547c1122a71d6e6e14d79803
+$ 
+
+=============================================================================================================
+
+Deploy a mysql database using the mysql image and name it mysql-db.
+Set the database password to use db_pass123. Lookup the mysql image on Docker Hub and identify the correct environment variable to use for setting the root password.
+
+
+
+$ docker run -d --name=mysql-db -e MYSQL_ROOT_PASSWORD=db_pass123 mysql
+c9035b49a1c52cd22a28e3d039a2f03877b363be17e0a234ae56bf1b5454ae00
+$ 
+
+===============================================================================================================
+
+
+
+
+
