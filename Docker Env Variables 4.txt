@@ -1,0 +1,65 @@
+Certainly! Let's break down the code for the CustomizedResponseEntityExceptionHandler class step by step:
+
+java
+Copy code
+package com.cms.exception;
+package com.cms.exception;: Declares the package of the Java class.
+java
+Copy code
+import java.time.LocalDate;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.WebRequest;
+import lombok.extern.slf4j.Slf4j;
+Imports:
+import java.time.LocalDate;: Imports the LocalDate class, which represents a date without time information.
+import org.springframework.http.HttpStatus;: Imports the HttpStatus enumeration from the Spring Framework. This enumeration represents HTTP status codes.
+import org.springframework.http.ResponseEntity;: Imports the ResponseEntity class from the Spring Framework. This class represents the entire HTTP response, including headers and body.
+import org.springframework.web.bind.annotation.ControllerAdvice;: Imports the ControllerAdvice annotation from the Spring Framework. This annotation allows the implementation of exception handling across all controllers.
+import org.springframework.web.bind.annotation.ExceptionHandler;: Imports the ExceptionHandler annotation, which is used to handle exceptions within annotated classes.
+import org.springframework.web.bind.annotation.RestController;: Imports the RestController annotation, indicating that this class will handle RESTful responses.
+import org.springframework.web.context.request.WebRequest;: Imports the WebRequest interface, which represents a web request in the Spring framework.
+import lombok.extern.slf4j.Slf4j;: Imports the Slf4j annotation from the Lombok library. This annotation generates a logger for the class, facilitating logging.
+java
+Copy code
+@Slf4j
+@ControllerAdvice
+@RestController
+public class CustomizedResponseEntityExceptionHandler {
+Class Declaration:
+@Slf4j: Generates a logger for the class using Lombok. The logger is named log.
+@ControllerAdvice: Marks the class as an advisor for controllers. It allows centralized handling of exceptions across multiple controllers.
+@RestController: Indicates that this class will handle RESTful responses.
+java
+Copy code
+@ExceptionHandler(value= {Exception.class})
+public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
+    ExceptionResponse errorDetails = new ExceptionResponse(LocalDate.now(),
+    ex.getMessage(),
+    request.getDescription(false),
+    "HTTP 500");
+    return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+}
+Exception Handling Method for Generic Exception:
+@ExceptionHandler(value= {Exception.class}): This annotation specifies that the following method will handle exceptions of type Exception.
+public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {: Defines a method named handleAllExceptions that takes an Exception and a WebRequest as parameters, and returns a ResponseEntity with an Object body.
+ExceptionResponse errorDetails = new ExceptionResponse(LocalDate.now(), ex.getMessage(), request.getDescription(false), "HTTP 500");: Creates an instance of the ExceptionResponse class, capturing the current date, the exception message, request details, and the HTTP status code ("HTTP 500").
+return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);: Constructs a ResponseEntity with the errorDetails as the body and sets the HTTP status to 500 (Internal Server Error).
+java
+Copy code
+@ExceptionHandler(value= {CourseInvalidException.class})
+public final ResponseEntity<ExceptionResponse> handleNotFoundException(CourseInvalidException ex, WebRequest request) {
+    ExceptionResponse errorDetails = new ExceptionResponse(LocalDate.now(),
+    ex.getMessage(),
+    request.getDescription(false),
+    "HTTP 404");    
+    return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+}
+Exception Handling Method for CourseInvalidException:
+@ExceptionHandler(value= {CourseInvalidException.class}): This annotation specifies that the following method will handle exceptions of type CourseInvalidException.
+public final ResponseEntity<ExceptionResponse> handleNotFoundException(CourseInvalidException ex, WebRequest request) {: Defines a method named handleNotFoundException that takes a CourseInvalidException and a WebRequest as parameters, and returns a ResponseEntity with an ExceptionResponse body.
+ExceptionResponse errorDetails = new ExceptionResponse(LocalDate.now(), ex.getMessage(), request.getDescription(false), "HTTP 404");: Creates an instance of the ExceptionResponse class, capturing the current date, the exception message, request details, and the HTTP status code ("HTTP 404").
+return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);: Constructs a ResponseEntity with the errorDetails as the body and sets the HTTP
