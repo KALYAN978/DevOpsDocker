@@ -1,0 +1,1307 @@
+2. Find a image from dockerhub of your choice(recommeded: nginx), don't use browser, pull the official image from dockerhub
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker pull nginx
+Using default tag: latest
+latest: Pulling from library/nginx
+578acb154839: Pull complete
+e398db710407: Pull complete
+85c41ebe6d66: Pull complete
+7170a263b582: Pull complete
+8f28d06e2e2e: Pull complete
+6f837de2f887: Pull complete
+c1dfc7e1671e: Pull complete
+Digest: sha256:86e53c4c16a6a276b204b0fd3a8143d86547c967dc8258b3d47c3a21bb68d3c6
+Status: Downloaded newer image for nginx:latest
+docker.io/library/nginx:latest
+[ec2-user@ip-172-31-28-235 ~]$
+
+=====================================================================================================
+3. List all the available images in your machine/vm, make sure you see recently pulled image in the list.
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+nginx        latest    c20060033e06   13 days ago   187MB
+[ec2-user@ip-172-31-28-235 ~]$
+
+===========================================================================================
+
+4. Find out the "Full" ImageId of the image that you pulled and write it below.
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker inspect nginx
+[
+    {
+        "Id": "sha256:c20060033e06f882b0fbe2db7d974d72e0887a3be5e554efdb0dcf8d53512647",
+        "RepoTags": [
+            "nginx:latest"
+        ],
+        "RepoDigests": [
+            "nginx@sha256:86e53c4c16a6a276b204b0fd3a8143d86547c967dc8258b3d47c3a21bb68d3c6"
+        ],
+        "Parent": "",
+        "Comment": "",
+        "Created": "2023-11-01T05:12:14.305489502Z",
+        "Container": "22d7d657198f5b244b6263948a9fbb121dfeac76df31a9769da4586fb5115071",
+        "ContainerConfig": {
+            "Hostname": "22d7d657198f",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "80/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "NGINX_VERSION=1.25.3",
+                "NJS_VERSION=0.8.2",
+                "PKG_RELEASE=1~bookworm"
+            ],
+            "Cmd": [
+                "/bin/sh",
+                "-c",
+                "#(nop) ",
+                "CMD [\"nginx\" \"-g\" \"daemon off;\"]"
+            ],
+            "Image": "sha256:68099835596e7e1043c4c8bbbc1961c727080f9ebb5c0b2c54387c794eb0f621",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": [
+                "/docker-entrypoint.sh"
+            ],
+            "OnBuild": null,
+            "Labels": {
+                "maintainer": "NGINX Docker Maintainers <docker-maint@nginx.com>"
+            },
+            "StopSignal": "SIGQUIT"
+        },
+        "DockerVersion": "20.10.23",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "80/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "NGINX_VERSION=1.25.3",
+                "NJS_VERSION=0.8.2",
+                "PKG_RELEASE=1~bookworm"
+            ],
+            "Cmd": [
+                "nginx",
+                "-g",
+                "daemon off;"
+            ],
+            "Image": "sha256:68099835596e7e1043c4c8bbbc1961c727080f9ebb5c0b2c54387c794eb0f621",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": [
+                "/docker-entrypoint.sh"
+            ],
+            "OnBuild": null,
+            "Labels": {
+                "maintainer": "NGINX Docker Maintainers <docker-maint@nginx.com>"
+            },
+            "StopSignal": "SIGQUIT"
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 186779301,
+        "VirtualSize": 186779301,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/18168ab8b990d456320799423525d6eb424d8daa7651ded6e52c2824fd5b7750/diff:/var/lib/docker/overlay2/daf44a3d5bb0672f9b847c4a026e3370e353086e26ac078a4abbdfc9c38bbb04/diff:/var/lib/docker/overlay2/602efa31e996da8a71d84c6e8d96c6edb2a3e34040ba5a54117f36419989aa00/diff:/var/lib/docker/overlay2/e3ac3344bfd47326f67d1445fe64c4f3c0e638122fbd1fddad27e02ba8813d4a/diff:/var/lib/docker/overlay2/3aa01d82891666e4a97a7d93421674f80e02d6925ba64ded0e5d3244e6e34031/diff:/var/lib/docker/overlay2/ae60448d6d2edba4fdcee0d0ba98c117f93453af469d43eb4357c52353efa311/diff",
+                "MergedDir": "/var/lib/docker/overlay2/0d5705740d74319dab080a78b7853bf29fa6c70d43dd5f1a4f5fab98bd9a099f/merged",
+                "UpperDir": "/var/lib/docker/overlay2/0d5705740d74319dab080a78b7853bf29fa6c70d43dd5f1a4f5fab98bd9a099f/diff",
+                "WorkDir": "/var/lib/docker/overlay2/0d5705740d74319dab080a78b7853bf29fa6c70d43dd5f1a4f5fab98bd9a099f/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:ec983b16636050e69677eb81537e955ab927757c23aaf73971ecf5f71fcc262a",
+                "sha256:609f2a18d224cf695a954a6fe2785101828954829417021d1f7c3fa4d31e0753",
+                "sha256:e503754c9a26543a728b7c3641e617c2a69ca599617ce783eeb81bc12a88df95",
+                "sha256:715b32fa0f1206db2a1b8855eb8a5f90392d4c30e622fced07baf73b0711d31b",
+                "sha256:768e28a222fdcbea7962af44913d7ccba7e9d03e1aa089e428103caa87d89eb8",
+                "sha256:9920f1ebf52b217bf9e7a40a88cf4c609450692fc5b2b112347a1b05fbb8ae57",
+                "sha256:505f49f13fbe9f5ff9e965e1ef1280f4fd776153cab92f152bd572926eed8830"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "0001-01-01T00:00:00Z"
+        }
+    }
+]
+[ec2-user@ip-172-31-28-235 ~]$
+==========================================================================================================
+
+5. Create a container of your image
+
+
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS     NAMES
+84b24b63bdab   nginx     "/docker-entrypoint.…"   11 minutes ago   Up 11 minutes   80/tcp    busy_ritchie
+[ec2-user@ip-172-31-28-235 ~]$
+
+========================================================================================================
+
+6. List all the running containers
+
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS     NAMES
+84b24b63bdab   nginx     "/docker-entrypoint.…"   12 minutes ago   Up 12 minutes   80/tcp    busy_ritchie
+[ec2-user@ip-172-31-28-235 ~]$
+
+====================================================================================================
+
+7. List all the running and stopped containers
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                      PORTS     NAMES
+84b24b63bdab   nginx     "/docker-entrypoint.…"   17 minutes ago   Exited (0) 52 seconds ago             busy_ritchie
+56e34410cced   nginx     "/docker-entrypoint.…"   25 minutes ago   Exited (0) 19 minutes ago             cool_joliot
+[ec2-user@ip-172-31-28-235 ~]$
+
+===========================================================================================================
+
+8. Find out the "Full" containerId of the container and write it below.
+
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS     NAMES
+3c187881de0c   nginx     "/docker-entrypoint.…"   13 minutes ago   Up 13 minutes   80/tcp    silly_blackburn
+[ec2-user@ip-172-31-28-235 ~]$ docker inspect nginx
+[
+    {
+        "Id": "sha256:c20060033e06f882b0fbe2db7d974d72e0887a3be5e554efdb0dcf8d53512647",
+        "RepoTags": [
+            "nginx:latest"
+        ],
+        "RepoDigests": [
+            "nginx@sha256:86e53c4c16a6a276b204b0fd3a8143d86547c967dc8258b3d47c3a21bb68d3c6"
+        ],
+        "Parent": "",
+        "Comment": "",
+        "Created": "2023-11-01T05:12:14.305489502Z",
+        "Container": "22d7d657198f5b244b6263948a9fbb121dfeac76df31a9769da4586fb5115071",
+        "ContainerConfig": {
+            "Hostname": "22d7d657198f",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "80/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "NGINX_VERSION=1.25.3",
+                "NJS_VERSION=0.8.2",
+                "PKG_RELEASE=1~bookworm"
+            ],
+            "Cmd": [
+                "/bin/sh",
+                "-c",
+                "#(nop) ",
+                "CMD [\"nginx\" \"-g\" \"daemon off;\"]"
+            ],
+            "Image": "sha256:68099835596e7e1043c4c8bbbc1961c727080f9ebb5c0b2c54387c794eb0f621",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": [
+                "/docker-entrypoint.sh"
+            ],
+            "OnBuild": null,
+            "Labels": {
+                "maintainer": "NGINX Docker Maintainers <docker-maint@nginx.com>"
+            },
+            "StopSignal": "SIGQUIT"
+        },
+        "DockerVersion": "20.10.23",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "80/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "NGINX_VERSION=1.25.3",
+                "NJS_VERSION=0.8.2",
+                "PKG_RELEASE=1~bookworm"
+            ],
+            "Cmd": [
+                "nginx",
+                "-g",
+                "daemon off;"
+            ],
+            "Image": "sha256:68099835596e7e1043c4c8bbbc1961c727080f9ebb5c0b2c54387c794eb0f621",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": [
+                "/docker-entrypoint.sh"
+            ],
+            "OnBuild": null,
+            "Labels": {
+                "maintainer": "NGINX Docker Maintainers <docker-maint@nginx.com>"
+            },
+            "StopSignal": "SIGQUIT"
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 186779301,
+        "VirtualSize": 186779301,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/18168ab8b990d456320799423525d6eb424d8daa7651ded6e52c2824fd5b7750/diff:/var/lib/docker/overlay2/daf44a3d5bb0672f9b847c4a026e3370e353086e26ac078a4abbdfc9c38bbb04/diff:/var/lib/docker/overlay2/602efa31e996da8a71d84c6e8d96c6edb2a3e34040ba5a54117f36419989aa00/diff:/var/lib/docker/overlay2/e3ac3344bfd47326f67d1445fe64c4f3c0e638122fbd1fddad27e02ba8813d4a/diff:/var/lib/docker/overlay2/3aa01d82891666e4a97a7d93421674f80e02d6925ba64ded0e5d3244e6e34031/diff:/var/lib/docker/overlay2/ae60448d6d2edba4fdcee0d0ba98c117f93453af469d43eb4357c52353efa311/diff",
+                "MergedDir": "/var/lib/docker/overlay2/0d5705740d74319dab080a78b7853bf29fa6c70d43dd5f1a4f5fab98bd9a099f/merged",
+                "UpperDir": "/var/lib/docker/overlay2/0d5705740d74319dab080a78b7853bf29fa6c70d43dd5f1a4f5fab98bd9a099f/diff",
+                "WorkDir": "/var/lib/docker/overlay2/0d5705740d74319dab080a78b7853bf29fa6c70d43dd5f1a4f5fab98bd9a099f/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:ec983b16636050e69677eb81537e955ab927757c23aaf73971ecf5f71fcc262a",
+                "sha256:609f2a18d224cf695a954a6fe2785101828954829417021d1f7c3fa4d31e0753",
+                "sha256:e503754c9a26543a728b7c3641e617c2a69ca599617ce783eeb81bc12a88df95",
+                "sha256:715b32fa0f1206db2a1b8855eb8a5f90392d4c30e622fced07baf73b0711d31b",
+                "sha256:768e28a222fdcbea7962af44913d7ccba7e9d03e1aa089e428103caa87d89eb8",
+                "sha256:9920f1ebf52b217bf9e7a40a88cf4c609450692fc5b2b112347a1b05fbb8ae57",
+                "sha256:505f49f13fbe9f5ff9e965e1ef1280f4fd776153cab92f152bd572926eed8830"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "0001-01-01T00:00:00Z"
+        }
+    }
+]
+
+=========================================================================================================
+
+Find out how many image layers are used to build this image.
+
+Get the Apache Tomcat 7 server image from the docker hub.
+
+[ec2-user@ip-172-31-28-235 ~]$ docker history nginx
+IMAGE          CREATED       CREATED BY                                      SIZE      COMMENT
+c20060033e06   13 days ago   /bin/sh -c #(nop)  CMD ["nginx" "-g" "daemon…   0B 
+<missing>      13 days ago   /bin/sh -c #(nop)  STOPSIGNAL SIGQUIT           0B 
+<missing>      13 days ago   /bin/sh -c #(nop)  EXPOSE 80                    0B 
+<missing>      13 days ago   /bin/sh -c #(nop)  ENTRYPOINT ["/docker-entr…   0B 
+<missing>      13 days ago   /bin/sh -c #(nop) COPY file:9e3b2b63db9f8fc7…   4.62kB
+<missing>      13 days ago   /bin/sh -c #(nop) COPY file:57846632accc8975…   3.02kB
+<missing>      13 days ago   /bin/sh -c #(nop) COPY file:3b1b9915b7dd898a…   298B
+<missing>      13 days ago   /bin/sh -c #(nop) COPY file:caec368f5a54f70a…   2.12kB
+<missing>      13 days ago   /bin/sh -c #(nop) COPY file:01e75c6dd0ce317d…   1.62kB
+<missing>      13 days ago   /bin/sh -c set -x     && groupadd --system -…   112MB
+<missing>      13 days ago   /bin/sh -c #(nop)  ENV PKG_RELEASE=1~bookworm   0B 
+<missing>      13 days ago   /bin/sh -c #(nop)  ENV NJS_VERSION=0.8.2        0B 
+<missing>      13 days ago   /bin/sh -c #(nop)  ENV NGINX_VERSION=1.25.3     0B 
+<missing>      13 days ago   /bin/sh -c #(nop)  LABEL maintainer=NGINX Do…   0B 
+<missing>      2 weeks ago   /bin/sh -c #(nop)  CMD ["bash"]                 0B 
+<missing>      2 weeks ago   /bin/sh -c #(nop) ADD file:fbd8521c24ed75802…   74.8MB
+[ec2-user@ip-172-31-28-235 ~]$
+
+===========================================================================================================
+
+
+Get the Apache Tomcat 7 server image from the docker hub.
+
+
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker pull tomcat:7
+7: Pulling from library/tomcat
+0bc3020d05f1: Pull complete
+a110e5871660: Pull complete
+83d3c0fa203a: Pull complete
+a8fd09c11b02: Pull complete
+96ebf1506065: Pull complete
+26b72ffca293: Pull complete
+0bffa2ea17aa: Pull complete
+d880cebcc7a6: Pull complete
+d19ab8039b36: Pull complete
+5057492dc495: Pull complete
+Digest: sha256:f7d37d248d0eacec1e5995736234c9c22155626fcb27ea3ead13b9db24e698f7
+Status: Downloaded newer image for tomcat:7
+docker.io/library/tomcat:7
+[ec2-user@ip-172-31-28-235 ~]$
+
+========================================================================================================
+
+11. Run the Apache Tomcat 7, I mean create a container of Apache Tomcat
+
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker run tomcat:7
+Nov 15, 2023 2:00:12 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version name:   Apache Tomcat/7.0.109
+Nov 15, 2023 2:00:12 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server built:          Apr 22 2021 18:43:38 UTC
+Nov 15, 2023 2:00:12 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version number: 7.0.109.0
+Nov 15, 2023 2:00:12 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Name:               Linux
+Nov 15, 2023 2:00:13 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Version:            6.1.59-84.139.amzn2023.x86_64
+Nov 15, 2023 2:00:13 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Architecture:          amd64
+Nov 15, 2023 2:00:13 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Java Home:             /usr/local/openjdk-8/jre
+Nov 15, 2023 2:00:13 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Version:           1.8.0_292-b10
+Nov 15, 2023 2:00:13 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Vendor:            Oracle Corporation
+Nov 15, 2023 2:00:13 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_BASE:         /usr/local/tomcat
+Nov 15, 2023 2:00:13 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_HOME:         /usr/local/tomcat
+Nov 15, 2023 2:00:13 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.util.logging.config.file=/usr/local/tomcat/conf/logging.properties
+Nov 15, 2023 2:00:13 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+Nov 15, 2023 2:00:13 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+Nov 15, 2023 2:00:13 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+Nov 15, 2023 2:00:13 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dignore.endorsed.dirs=
+Nov 15, 2023 2:00:13 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dcatalina.base=/usr/local/tomcat
+Nov 15, 2023 2:00:13 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dcatalina.home=/usr/local/tomcat
+Nov 15, 2023 2:00:13 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.io.tmpdir=/usr/local/tomcat/temp
+Nov 15, 2023 2:00:13 AM org.apache.catalina.core.AprLifecycleListener lifecycleEvent
+INFO: Loaded Apache Tomcat Native library [1.2.28] using APR version [1.6.5].
+Nov 15, 2023 2:00:13 AM org.apache.catalina.core.AprLifecycleListener lifecycleEvent
+INFO: APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+Nov 15, 2023 2:00:13 AM org.apache.catalina.core.AprLifecycleListener initializeSSL
+INFO: OpenSSL successfully initialized [OpenSSL 1.1.1d  10 Sep 2019]
+Nov 15, 2023 2:00:13 AM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-apr-8080"]
+Nov 15, 2023 2:00:13 AM org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 870 ms
+Nov 15, 2023 2:00:13 AM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service [Catalina]
+Nov 15, 2023 2:00:13 AM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.109
+Nov 15, 2023 2:00:13 AM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-apr-8080"]
+Nov 15, 2023 2:00:13 AM org.apache.catalina.startup.Catalina start
+INFO: Server startup in 55 ms
+
+
+======================================================================================================
+
+Find out what is the IP Address of the Apache Tomcat Container that it is running on
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker ps
+CONTAINER ID   IMAGE      COMMAND             CREATED         STATUS         PORTS      NAMES
+19a18e892817   tomcat:7   "catalina.sh run"   8 minutes ago   Up 8 minutes   8080/tcp   musing_haibt
+[ec2-user@ip-172-31-28-235 ~]$ docker inspect --format '{{ .NetworkSettings.IPAddress }}' 19a18e892817
+172.17.0.2
+[ec2-user@ip-172-31-28-235 ~]$
+
+
+
+====================================================================================================
+
+13. Which Port it is using?
+
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker ps
+CONTAINER ID   IMAGE      COMMAND             CREATED          STATUS          PORTS      NAMES
+19a18e892817   tomcat:7   "catalina.sh run"   10 minutes ago   Up 10 minutes   8080/tcp   musing_haibt
+[ec2-user@ip-172-31-28-235 ~]$
+
+=======================================================================================================
+
+14. Try to access the Tomcat's home page from your machine/vm.
+
+
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker run -p 8080:8080 tomcat:7
+Nov 15, 2023 2:13:17 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version name:   Apache Tomcat/7.0.109
+Nov 15, 2023 2:13:17 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server built:          Apr 22 2021 18:43:38 UTC
+Nov 15, 2023 2:13:17 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version number: 7.0.109.0
+Nov 15, 2023 2:13:17 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Name:               Linux
+Nov 15, 2023 2:13:17 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Version:            6.1.59-84.139.amzn2023.x86_64
+Nov 15, 2023 2:13:17 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Architecture:          amd64
+Nov 15, 2023 2:13:17 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Java Home:             /usr/local/openjdk-8/jre
+Nov 15, 2023 2:13:17 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Version:           1.8.0_292-b10
+Nov 15, 2023 2:13:17 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Vendor:            Oracle Corporation
+Nov 15, 2023 2:13:17 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_BASE:         /usr/local/tomcat
+Nov 15, 2023 2:13:17 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_HOME:         /usr/local/tomcat
+Nov 15, 2023 2:13:17 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.util.logging.config.file=/usr/local/tomcat/conf/logging.properties
+Nov 15, 2023 2:13:17 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+Nov 15, 2023 2:13:17 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+Nov 15, 2023 2:13:17 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+Nov 15, 2023 2:13:17 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dignore.endorsed.dirs=
+Nov 15, 2023 2:13:17 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dcatalina.base=/usr/local/tomcat
+Nov 15, 2023 2:13:17 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dcatalina.home=/usr/local/tomcat
+Nov 15, 2023 2:13:17 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.io.tmpdir=/usr/local/tomcat/temp
+Nov 15, 2023 2:13:17 AM org.apache.catalina.core.AprLifecycleListener lifecycleEvent
+INFO: Loaded Apache Tomcat Native library [1.2.28] using APR version [1.6.5].
+Nov 15, 2023 2:13:17 AM org.apache.catalina.core.AprLifecycleListener lifecycleEvent
+INFO: APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+Nov 15, 2023 2:13:17 AM org.apache.catalina.core.AprLifecycleListener initializeSSL
+INFO: OpenSSL successfully initialized [OpenSSL 1.1.1d  10 Sep 2019]
+Nov 15, 2023 2:13:17 AM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-apr-8080"]
+Nov 15, 2023 2:13:17 AM org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 894 ms
+Nov 15, 2023 2:13:17 AM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service [Catalina]
+Nov 15, 2023 2:13:17 AM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.109
+Nov 15, 2023 2:13:17 AM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-apr-8080"]
+Nov 15, 2023 2:13:17 AM org.apache.catalina.startup.Catalina start
+INFO: Server startup in 72 ms
+
+==========================================================================================================
+
+5. What is the disk size of Apache Tomcat image?
+
+
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+nginx        latest    c20060033e06   13 days ago   187MB
+tomcat       7         9dfd74e6bc2f   2 years ago   533MB
+[ec2-user@ip-172-31-28-235 ~]$
+
+=========================================================================================================
+
+Find out list of all environment variables that is configured for tomcat image, can you see JAVA_HOME and CATALINA_HOME? What did you notice about it?
+
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker inspect tomcat:7
+[
+    {
+        "Id": "sha256:9dfd74e6bc2f5a477649be71bec187dce1c04cccecaca286d5e6604e9f8d2afc",
+        "RepoTags": [
+            "tomcat:7"
+        ],
+        "RepoDigests": [
+            "tomcat@sha256:f7d37d248d0eacec1e5995736234c9c22155626fcb27ea3ead13b9db24e698f7"
+        ],
+        "Parent": "",
+        "Comment": "",
+        "Created": "2021-07-02T20:16:14.754095752Z",
+        "Container": "fcf4483c501538de81825b7c30cd25dc804d2ceaaab7b27cc91cb3f11c2d6ef8",
+        "ContainerConfig": {
+            "Hostname": "fcf4483c5015",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "8080/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/tomcat/bin:/usr/local/openjdk-8/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "JAVA_HOME=/usr/local/openjdk-8",
+                "LANG=C.UTF-8",
+                "JAVA_VERSION=8u292",
+                "CATALINA_HOME=/usr/local/tomcat",
+                "TOMCAT_NATIVE_LIBDIR=/usr/local/tomcat/native-jni-lib",
+                "LD_LIBRARY_PATH=/usr/local/tomcat/native-jni-lib",
+                "GPG_KEYS=05AB33110949707C93A279E3D3EFE6B686867BA6 07E48665A34DCAFAE522E5E6266191C37C037D42 47309207D818FFD8DCD3F83F1931D684307A10A5 541FBE7D8F78B25E055DDEE13C370389288584E7 61B832AC2F1C5A90F0F9B00A1C506407564C17A3 713DA88BE50911535FE716F5208B0AB1D63011C7 79F7026C690BAA50B92CD8B66A3AD3F4F22C4FED 9BA44C2621385CB966EBA586F72C284D731FABEE A27677289986DB50844682F8ACB77FC2E86E29AC A9C5DF4D22E99998D9875A5110C01C5A2F6059E7 DCFD35E0BF8CA7344752DE8B6FB21E8933C60243 F3A04C595DB5B6A5F1ECA43E3B7BBB100D811BBE F7DA48BB64BCB84ECBA7EE6935CD23C10D498E23",
+                "TOMCAT_MAJOR=7",
+                "TOMCAT_VERSION=7.0.109",
+                "TOMCAT_SHA512=612e830913bf1401bc9540e2273e465b0ee7ef63750a9969a80f1e9da9edb4888aa621fcc6fa5ba23cff94a40e91eb97e3f969b8064dabd49b2d0ea29e59b57e"
+            ],
+            "Cmd": [
+                "/bin/sh",
+                "-c",
+                "#(nop) ",
+                "CMD [\"catalina.sh\" \"run\"]"
+            ],
+            "Image": "sha256:f3e4268a01e52ebafdbdcd735ecbc05cfaf7f9ab4161db4adf93d531fe5812d1",
+            "Volumes": null,
+            "WorkingDir": "/usr/local/tomcat",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "DockerVersion": "20.10.7",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "8080/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/tomcat/bin:/usr/local/openjdk-8/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "JAVA_HOME=/usr/local/openjdk-8",
+                "LANG=C.UTF-8",
+                "JAVA_VERSION=8u292",
+                "CATALINA_HOME=/usr/local/tomcat",
+                "TOMCAT_NATIVE_LIBDIR=/usr/local/tomcat/native-jni-lib",
+                "LD_LIBRARY_PATH=/usr/local/tomcat/native-jni-lib",
+                "GPG_KEYS=05AB33110949707C93A279E3D3EFE6B686867BA6 07E48665A34DCAFAE522E5E6266191C37C037D42 47309207D818FFD8DCD3F83F1931D684307A10A5 541FBE7D8F78B25E055DDEE13C370389288584E7 61B832AC2F1C5A90F0F9B00A1C506407564C17A3 713DA88BE50911535FE716F5208B0AB1D63011C7 79F7026C690BAA50B92CD8B66A3AD3F4F22C4FED 9BA44C2621385CB966EBA586F72C284D731FABEE A27677289986DB50844682F8ACB77FC2E86E29AC A9C5DF4D22E99998D9875A5110C01C5A2F6059E7 DCFD35E0BF8CA7344752DE8B6FB21E8933C60243 F3A04C595DB5B6A5F1ECA43E3B7BBB100D811BBE F7DA48BB64BCB84ECBA7EE6935CD23C10D498E23",
+                "TOMCAT_MAJOR=7",
+                "TOMCAT_VERSION=7.0.109",
+                "TOMCAT_SHA512=612e830913bf1401bc9540e2273e465b0ee7ef63750a9969a80f1e9da9edb4888aa621fcc6fa5ba23cff94a40e91eb97e3f969b8064dabd49b2d0ea29e59b57e"
+            ],
+            "Cmd": [
+                "catalina.sh",
+                "run"
+            ],
+            "Image": "sha256:f3e4268a01e52ebafdbdcd735ecbc05cfaf7f9ab4161db4adf93d531fe5812d1",
+            "Volumes": null,
+            "WorkingDir": "/usr/local/tomcat",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": null
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 532923997,
+        "VirtualSize": 532923997,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/c1d31fd55736c9f5e29502d0428a479106b5a71df05d95a8adbab9ebfcdc112f/diff:/var/lib/docker/overlay2/3fa686072205bcf07b525918cc322684d3d57a5548f59d98ff388706e9c5f7a4/diff:/var/lib/docker/overlay2/fe9d335c48d9fce9241a21567a63c267531220730bb99a66ace3d59e66a563af/diff:/var/lib/docker/overlay2/cd59883ee9eff810156a174e3ddb27d4b9eb8e4324bfa824f9348c318aff3a3a/diff:/var/lib/docker/overlay2/dc19043eef998bda34e8565a1a74a0b1b92033367e20693148ecbcf7c4ff1951/diff:/var/lib/docker/overlay2/b92ec7fdd4fcecd23c1d7bdc717859c0702d8bcd7fe5c41f0dc3274812b57e92/diff:/var/lib/docker/overlay2/b6317926371bbfe633df2689eec2191c818e3b2bb7d23011294d832c5410f505/diff:/var/lib/docker/overlay2/ca73f74df6b214c6c6499bf9e19830efbcae416a1a6fd8c18075c2f922c97bb4/diff:/var/lib/docker/overlay2/36e09d7cc220848514e1391c8e25794019c6e72bdc5819d01b93b3a3e1fe9a94/diff",
+                "MergedDir": "/var/lib/docker/overlay2/d94bf7aa677628ad22f5182c43d6b59d58ffc92195e2b28af7c5d530e67a9b82/merged",
+                "UpperDir": "/var/lib/docker/overlay2/d94bf7aa677628ad22f5182c43d6b59d58ffc92195e2b28af7c5d530e67a9b82/diff",
+                "WorkDir": "/var/lib/docker/overlay2/d94bf7aa677628ad22f5182c43d6b59d58ffc92195e2b28af7c5d530e67a9b82/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:4e006334a6fdea37622f72b21eb75fe1484fc4f20ce8b8526187d6f7bd90a6fe",
+                "sha256:e4d0e810d54a9c47e3dface412b0b88045d156b18809a2e0bbfb0fc8a45d8127",
+                "sha256:fe6a4fdbedc0cbc560437fa700b3b034114e31a264f0818d0d32ed2ee6cbe7a3",
+                "sha256:7095af798ace32173839a61cbf101048434e1065185c0f29cc888e67158d990b",
+                "sha256:79c550eb7bd278d360284d86c39e05852c2026b64232267a43947300bcf54a2c",
+                "sha256:c3d00b097cce7df7dff99107ed0005fc4ceb14abaeac24316c8b120b4cd4c03a",
+                "sha256:aed5f5426b278d2800d114b061cc51b745d042ca1ef9294f8f9a77dfa5c19315",
+                "sha256:9d48355da13b8a355aaf6c479d386dc4280cb1e491271490e9f85d88831adb9b",
+                "sha256:9a7d423f0aca6fe94d7589b88bbd1f0ea7ba312ccac407a5a6fdce1f0728ed4e",
+                "sha256:0eaefafb498bae9e3be40bd9d93bd4d6aca4cf8fe281e97fe36ed3f598e45e4e"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "0001-01-01T00:00:00Z"
+        }
+    }
+]
+[ec2-user@ip-172-31-28-235 ~]$
+
+=======================================================================================================
+
+Find out which port is exposed for tomcat?
+
+[ec2-user@ip-172-31-28-235 ~]$ docker ps
+CONTAINER ID   IMAGE      COMMAND             CREATED         STATUS         PORTS                                       NAMES
+149286e3468f   tomcat:7   "catalina.sh run"   4 minutes ago   Up 4 minutes   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   priceless_dirac
+[ec2-user@ip-172-31-28-235 ~]$
+
+
+============================================================================================================
+
+Run multiple conntainers of tomcat on different port and access it's home page.
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker run -d -p 8080:8080 --name=tomcat1 tomcat:7
+691f40a0f290fe3ce38b9fbbdc6a6ff7633833f38f41aa44bf7a9bb55d247f5e
+docker: Error response from daemon: driver failed programming external connectivity on endpoint tomcat1 (7900f6881c983fd3c03c719c3ca242a2d12e58c99a50858dd37fbdd1251ada6a): Bind for 0.0.0.0:8080 failed: port is already allocated.
+[ec2-user@ip-172-31-28-235 ~]$ docker run -d -p 8081:8080 --name=tomcat1 tomcat:7
+docker: Error response from daemon: Conflict. The container name "/tomcat1" is already in use by container "691f40a0f290fe3ce38b9fbbdc6a6ff7633833f38f41aa44bf7a9bb55d247f5e". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+[ec2-user@ip-172-31-28-235 ~]$ docker stop container tomcat1
+tomcat1
+Error response from daemon: No such container: container
+[ec2-user@ip-172-31-28-235 ~]$ docker rm tomcat1
+tomcat1
+[ec2-user@ip-172-31-28-235 ~]$ docker run -p 8081:8080 --name=tomcat1 tomcat:7
+Nov 15, 2023 3:49:19 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version name:   Apache Tomcat/7.0.109
+Nov 15, 2023 3:49:19 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server built:          Apr 22 2021 18:43:38 UTC
+Nov 15, 2023 3:49:19 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version number: 7.0.109.0
+Nov 15, 2023 3:49:19 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Name:               Linux
+Nov 15, 2023 3:49:19 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Version:            6.1.59-84.139.amzn2023.x86_64
+Nov 15, 2023 3:49:19 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Architecture:          amd64
+Nov 15, 2023 3:49:19 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Java Home:             /usr/local/openjdk-8/jre
+Nov 15, 2023 3:49:19 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Version:           1.8.0_292-b10
+Nov 15, 2023 3:49:19 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Vendor:            Oracle Corporation
+Nov 15, 2023 3:49:19 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_BASE:         /usr/local/tomcat
+Nov 15, 2023 3:49:19 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_HOME:         /usr/local/tomcat
+Nov 15, 2023 3:49:19 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.util.logging.config.file=/usr/local/tomcat/conf/logging.properties
+Nov 15, 2023 3:49:19 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+Nov 15, 2023 3:49:19 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+Nov 15, 2023 3:49:19 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+Nov 15, 2023 3:49:19 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dignore.endorsed.dirs=
+Nov 15, 2023 3:49:19 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dcatalina.base=/usr/local/tomcat
+Nov 15, 2023 3:49:19 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dcatalina.home=/usr/local/tomcat
+Nov 15, 2023 3:49:19 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.io.tmpdir=/usr/local/tomcat/temp
+Nov 15, 2023 3:49:19 AM org.apache.catalina.core.AprLifecycleListener lifecycleEvent
+INFO: Loaded Apache Tomcat Native library [1.2.28] using APR version [1.6.5].
+Nov 15, 2023 3:49:19 AM org.apache.catalina.core.AprLifecycleListener lifecycleEvent
+INFO: APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+Nov 15, 2023 3:49:19 AM org.apache.catalina.core.AprLifecycleListener initializeSSL
+INFO: OpenSSL successfully initialized [OpenSSL 1.1.1d  10 Sep 2019]
+Nov 15, 2023 3:49:19 AM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-apr-8080"]
+Nov 15, 2023 3:49:19 AM org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 852 ms
+Nov 15, 2023 3:49:19 AM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service [Catalina]
+Nov 15, 2023 3:49:19 AM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.109
+Nov 15, 2023 3:49:19 AM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-apr-8080"]
+Nov 15, 2023 3:49:19 AM org.apache.catalina.startup.Catalina start
+INFO: Server startup in 72 ms
+^CNov 15, 2023 3:49:37 AM org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["http-apr-8080"]
+Nov 15, 2023 3:49:37 AM org.apache.catalina.core.StandardService stopInternal
+INFO: Stopping service [Catalina]
+Nov 15, 2023 3:49:37 AM org.apache.coyote.AbstractProtocol stop
+INFO: Stopping ProtocolHandler ["http-apr-8080"]
+Nov 15, 2023 3:49:37 AM org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["http-apr-8080"]
+[ec2-user@ip-172-31-28-235 ~]$ docker run -p 8082:8080 --name=tomcat2 tomcat:7
+Nov 15, 2023 3:50:05 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version name:   Apache Tomcat/7.0.109
+Nov 15, 2023 3:50:05 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server built:          Apr 22 2021 18:43:38 UTC
+Nov 15, 2023 3:50:05 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version number: 7.0.109.0
+Nov 15, 2023 3:50:05 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Name:               Linux
+Nov 15, 2023 3:50:05 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Version:            6.1.59-84.139.amzn2023.x86_64
+Nov 15, 2023 3:50:05 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Architecture:          amd64
+Nov 15, 2023 3:50:05 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Java Home:             /usr/local/openjdk-8/jre
+Nov 15, 2023 3:50:05 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Version:           1.8.0_292-b10
+Nov 15, 2023 3:50:05 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Vendor:            Oracle Corporation
+Nov 15, 2023 3:50:05 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_BASE:         /usr/local/tomcat
+Nov 15, 2023 3:50:05 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_HOME:         /usr/local/tomcat
+Nov 15, 2023 3:50:05 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.util.logging.config.file=/usr/local/tomcat/conf/logging.properties
+Nov 15, 2023 3:50:05 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+Nov 15, 2023 3:50:05 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+Nov 15, 2023 3:50:05 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+Nov 15, 2023 3:50:05 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dignore.endorsed.dirs=
+Nov 15, 2023 3:50:05 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dcatalina.base=/usr/local/tomcat
+Nov 15, 2023 3:50:05 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dcatalina.home=/usr/local/tomcat
+Nov 15, 2023 3:50:05 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.io.tmpdir=/usr/local/tomcat/temp
+Nov 15, 2023 3:50:05 AM org.apache.catalina.core.AprLifecycleListener lifecycleEvent
+INFO: Loaded Apache Tomcat Native library [1.2.28] using APR version [1.6.5].
+Nov 15, 2023 3:50:05 AM org.apache.catalina.core.AprLifecycleListener lifecycleEvent
+INFO: APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+Nov 15, 2023 3:50:05 AM org.apache.catalina.core.AprLifecycleListener initializeSSL
+INFO: OpenSSL successfully initialized [OpenSSL 1.1.1d  10 Sep 2019]
+Nov 15, 2023 3:50:05 AM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-apr-8080"]
+Nov 15, 2023 3:50:05 AM org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 836 ms
+Nov 15, 2023 3:50:05 AM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service [Catalina]
+Nov 15, 2023 3:50:05 AM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.109
+Nov 15, 2023 3:50:05 AM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-apr-8080"]
+Nov 15, 2023 3:50:05 AM org.apache.catalina.startup.Catalina start
+INFO: Server startup in 89 ms
+^C
+^CNov 15, 2023 3:50:20 AM org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["http-apr-8080"]
+Nov 15, 2023 3:50:20 AM org.apache.catalina.core.StandardService stopInternal
+INFO: Stopping service [Catalina]
+Nov 15, 2023 3:50:20 AM org.apache.coyote.AbstractProtocol stop
+INFO: Stopping ProtocolHandler ["http-apr-8080"]
+Nov 15, 2023 3:50:20 AM org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["http-apr-8080"]
+[ec2-user@ip-172-31-28-235 ~]$
+
+
+==========================================================================================================
+
+19. Pull ubuntu os from dockerhub, try to pull 2 images of ubuntu, Except the latest one.
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker pull ubuntu:20.04
+20.04: Pulling from library/ubuntu
+96d54c3075c9: Pull complete
+Digest: sha256:ed4a42283d9943135ed87d4ee34e542f7f5ad9ecf2f244870e23122f703f91c2
+Status: Downloaded newer image for ubuntu:20.04
+docker.io/library/ubuntu:20.04
+[ec2-user@ip-172-31-28-235 ~]$ docker pull ubuntu:18.4
+Error response from daemon: manifest for ubuntu:18.4 not found: manifest unknown: manifest unknown
+[ec2-user@ip-172-31-28-235 ~]$ docker pull ubuntu:18.04
+18.04: Pulling from library/ubuntu
+7c457f213c76: Pull complete
+Digest: sha256:152dc042452c496007f07ca9127571cb9c29697f42acbfad72324b2bb2e43c98
+Status: Downloaded newer image for ubuntu:18.04
+docker.io/library/ubuntu:18.04
+[ec2-user@ip-172-31-28-235 ~]$
+
+==========================================================================================================
+
+20. Run the container of ubuntu in attached mode.
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker run -it ubuntu:20.04
+root@196bf2c2893c:/# docker ps
+bash: docker: command not found
+root@196bf2c2893c:/# cd ..
+root@196bf2c2893c:/# cd ..
+root@196bf2c2893c:/# docker help
+bash: docker: command not found
+root@196bf2c2893c:/# docker run -it ubuntu:20.04
+
+
+bash: docker: command not found
+root@196bf2c2893c:/# exit
+exit
+[ec2-user@ip-172-31-28-235 ~]$
+
+===========================================================================================================
+
+
+21. Run the container of another ubuntu in detached mode.
+
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker run -d ubuntu:18.04
+c5c3fbf5bca2c1c77771f818faa5001903b52d138c593c05dd4fcd6e4283daaa
+[ec2-user@ip-172-31-28-235 ~]$
+
+============================================================================================================
+
+
+22. Check how many ubuntu containers are running and stopped
+
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker ps -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED              STATUS                          PORTS     NAMES
+c5c3fbf5bca2   ubuntu:18.04   "/bin/bash"              About a minute ago   Exited (0) About a minute ago             quirky_euclid
+196bf2c2893c   ubuntu:20.04   "/bin/bash"              5 minutes ago        Exited (127) 2 minutes ago                competent_rubin
+44cb9a4d818c   tomcat:7       "catalina.sh run"        13 minutes ago       Exited (130) 12 minutes ago               tomcat2
+2fd2b39290d7   tomcat:7       "catalina.sh run"        13 minutes ago       Exited (130) 13 minutes ago               tomcat1
+149286e3468f   tomcat:7       "catalina.sh run"        2 hours ago          Exited (130) 3 minutes ago                priceless_dirac
+19a18e892817   tomcat:7       "catalina.sh run"        2 hours ago          Exited (130) 2 hours ago                  musing_haibt
+3c187881de0c   nginx          "/docker-entrypoint.…"   3 hours ago          Exited (0) 2 hours ago                    silly_blackburn
+0f3a4d5364f3   nginx          "/docker-entrypoint.…"   3 hours ago          Exited (0) 3 hours ago                    great_perlman
+84b24b63bdab   nginx          "/docker-entrypoint.…"   3 hours ago          Exited (0) 3 hours ago                    busy_ritchie
+56e34410cced   nginx          "/docker-entrypoint.…"   3 hours ago          Exited (0) 3 hours ago                    cool_joliot
+[ec2-user@ip-172-31-28-235 ~]$
+=============================================================================================================
+
+23. Is the tomcat container running? If no, start one.
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker run -d --name=tomcat1 tomcat
+Unable to find image 'tomcat:latest' locally
+latest: Pulling from library/tomcat
+43f89b94cd7d: Pull complete
+a4452d37e1e4: Pull complete
+66bf1e8cc497: Pull complete
+39b9b405c53f: Pull complete
+74594af5feb5: Pull complete
+190e928f9c42: Pull complete
+e55c53c8b3ca: Pull complete
+64f862abfc3c: Pull complete
+Digest: sha256:86ada4acd78ca43972ad9f31e09ef1da00ca181cc0a204e7c31dc566d1e5cd60
+Status: Downloaded newer image for tomcat:latest
+docker: Error response from daemon: Conflict. The container name "/tomcat1" is already in use by container "2fd2b39290d733f38b086902c880e6b3567fe403654e8e3931be0ab6ee3c9b6e". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+[ec2-user@ip-172-31-28-235 ~]$
+
+============================================================================================================
+
+24. Check the logs, generated by tomcat container(don't forget to make request to tomcat's home page to see the log).
+
+
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker run -d --name=tomcat3 tomcat
+73ddd4e5ffa3e265fba96004381ca40a3091f1bea6c098b65e85d20fdc35639e
+[ec2-user@ip-172-31-28-235 ~]$ docker ps
+CONTAINER ID   IMAGE     COMMAND             CREATED         STATUS         PORTS      NAMES
+73ddd4e5ffa3   tomcat    "catalina.sh run"   6 seconds ago   Up 5 seconds   8080/tcp   tomcat3
+[ec2-user@ip-172-31-28-235 ~]$ docker inspect tomcat
+[
+    {
+        "Id": "sha256:fa51ad4dee227446060be37223b75f4e6a351508d90d1f08bcb7856108c1b59c",
+        "RepoTags": [
+            "tomcat:latest"
+        ],
+        "RepoDigests": [
+            "tomcat@sha256:86ada4acd78ca43972ad9f31e09ef1da00ca181cc0a204e7c31dc566d1e5cd60"
+        ],
+        "Parent": "",
+        "Comment": "",
+        "Created": "2023-10-31T03:36:24.510738971Z",
+        "Container": "d009a5bfe52fd6e1326ecd5b7ec2c3506ae576c4edd30f1928ab8909cdc59e13",
+        "ContainerConfig": {
+            "Hostname": "d009a5bfe52f",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "8080/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/tomcat/bin:/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "JAVA_HOME=/opt/java/openjdk",
+                "LANG=en_US.UTF-8",
+                "LANGUAGE=en_US:en",
+                "LC_ALL=en_US.UTF-8",
+                "JAVA_VERSION=jdk-21.0.1+12",
+                "CATALINA_HOME=/usr/local/tomcat",
+                "TOMCAT_NATIVE_LIBDIR=/usr/local/tomcat/native-jni-lib",
+                "LD_LIBRARY_PATH=/usr/local/tomcat/native-jni-lib",
+                "GPG_KEYS=5C3C5F3E314C866292F359A8F3AD5C94A67F707E A9C5DF4D22E99998D9875A5110C01C5A2F6059E7",
+                "TOMCAT_MAJOR=10",
+                "TOMCAT_VERSION=10.1.15",
+                "TOMCAT_SHA512=c9491ec96199b9ea49ffa37ff9ce7e257676f4f0e59cfed83c4054ab888dbf7f03d30ed5fad1fa88064ecfe43489ed51f21cd26abbeaf83a4ac4776468838fd6"
+            ],
+            "Cmd": [
+                "/bin/sh",
+                "-c",
+                "#(nop) ",
+                "CMD [\"catalina.sh\" \"run\"]"
+            ],
+            "Image": "sha256:325222bd9004d5de177174e0f129f44742fa02a2dc6976ea8720f66180937f43",
+            "Volumes": null,
+            "WorkingDir": "/usr/local/tomcat",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {
+                "org.opencontainers.image.ref.name": "ubuntu",
+                "org.opencontainers.image.version": "22.04"
+            }
+        },
+        "DockerVersion": "20.10.23",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "8080/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/tomcat/bin:/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "JAVA_HOME=/opt/java/openjdk",
+                "LANG=en_US.UTF-8",
+                "LANGUAGE=en_US:en",
+                "LC_ALL=en_US.UTF-8",
+                "JAVA_VERSION=jdk-21.0.1+12",
+                "CATALINA_HOME=/usr/local/tomcat",
+                "TOMCAT_NATIVE_LIBDIR=/usr/local/tomcat/native-jni-lib",
+                "LD_LIBRARY_PATH=/usr/local/tomcat/native-jni-lib",
+                "GPG_KEYS=5C3C5F3E314C866292F359A8F3AD5C94A67F707E A9C5DF4D22E99998D9875A5110C01C5A2F6059E7",
+                "TOMCAT_MAJOR=10",
+                "TOMCAT_VERSION=10.1.15",
+                "TOMCAT_SHA512=c9491ec96199b9ea49ffa37ff9ce7e257676f4f0e59cfed83c4054ab888dbf7f03d30ed5fad1fa88064ecfe43489ed51f21cd26abbeaf83a4ac4776468838fd6"
+            ],
+            "Cmd": [
+                "catalina.sh",
+                "run"
+            ],
+            "Image": "sha256:325222bd9004d5de177174e0f129f44742fa02a2dc6976ea8720f66180937f43",
+            "Volumes": null,
+            "WorkingDir": "/usr/local/tomcat",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {
+                "org.opencontainers.image.ref.name": "ubuntu",
+                "org.opencontainers.image.version": "22.04"
+            }
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 460050913,
+        "VirtualSize": 460050913,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/1a63d0fa47833691c45be45d73ecdf40b246a7d5d199f78cf647aebc319f4ac5/diff:/var/lib/docker/overlay2/19bd912cce4810706fd136e671b9aa4ea451e70bf43da6db7553df9abb4cbd9f/diff:/var/lib/docker/overlay2/dfc0a6f6702304e6862800a5bc99c3ba4166da5dafd30727d88e2939d1d35052/diff:/var/lib/docker/overlay2/82bad284fa0e3a308f23bf68f0493d1c45ba026834f347ffd7c69407f124b29a/diff:/var/lib/docker/overlay2/5b33846d4ca2f2652a93388fbf9b708d38f62b5f65208fdd180a9d96d4b62ab5/diff:/var/lib/docker/overlay2/d8f181733707717b4c134b612940e2f3de9b7f343b0abd8f3e2f1b92ca9ed1b1/diff:/var/lib/docker/overlay2/5fafa9c30a816c8d0d6aa139851aca8a5aed36855c9564a523cfe4c532f0f33d/diff",
+                "MergedDir": "/var/lib/docker/overlay2/29cfc7e6d7e5e8108ed1c9a0b39f1c18b2a6bccb8bf7b53a276b401be432382b/merged",
+                "UpperDir": "/var/lib/docker/overlay2/29cfc7e6d7e5e8108ed1c9a0b39f1c18b2a6bccb8bf7b53a276b401be432382b/diff",
+                "WorkDir": "/var/lib/docker/overlay2/29cfc7e6d7e5e8108ed1c9a0b39f1c18b2a6bccb8bf7b53a276b401be432382b/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:256d88da41857db513b95b50ba9a9b28491b58c954e25477d5dad8abb465430b",
+                "sha256:e62a9b52de75760495bf88acf7f01641a6f2d30b14e1b537fbfda7a4c02631b3",
+                "sha256:ab9d7066f1a6897554f0c7f2675a3329e0607e56980675bdd51fdea1f6e44508",
+                "sha256:b868a3e5268ba3197970af153084a7eb193ce9015ec6678eb9e38837035c0b0b",
+                "sha256:344e6f1175fe6fe5bfe582af606acd56fe1287eb2c29352e1bb271d9d9389cea",
+                "sha256:c151fd1b55b0adeb1b1609f0c6e5afe08a6878b51aba6f715d0dc940fdb1dc3f",
+                "sha256:e65d7902809a23cdc5a6a68b5d26904eb270e9cc1259186fe72c12202205fc44",
+                "sha256:5d950a630f32b612fdb3cf0150673f0961a16150a3ca38e05c1b00328d1a325e"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "0001-01-01T00:00:00Z"
+        }
+    }
+]
+[ec2-user@ip-172-31-28-235 ~]$ docker ps
+CONTAINER ID   IMAGE     COMMAND             CREATED         STATUS         PORTS      NAMES
+73ddd4e5ffa3   tomcat    "catalina.sh run"   3 minutes ago   Up 3 minutes   8080/tcp   tomcat3
+[ec2-user@ip-172-31-28-235 ~]$ ^C
+[ec2-user@ip-172-31-28-235 ~]$ docker logs 73ddd4e5ffa3
+15-Nov-2023 04:14:05.212 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/10.1.15
+15-Nov-2023 04:14:05.216 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Oct 11 2023 23:38:40 UTC
+15-Nov-2023 04:14:05.216 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 10.1.15.0
+15-Nov-2023 04:14:05.216 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+15-Nov-2023 04:14:05.217 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            6.1.59-84.139.amzn2023.x86_64
+15-Nov-2023 04:14:05.217 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+15-Nov-2023 04:14:05.217 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /opt/java/openjdk
+15-Nov-2023 04:14:05.217 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           21.0.1+12-LTS
+15-Nov-2023 04:14:05.217 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Eclipse Adoptium
+15-Nov-2023 04:14:05.217 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /usr/local/tomcat
+15-Nov-2023 04:14:05.218 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /usr/local/tomcat
+15-Nov-2023 04:14:05.243 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/usr/local/tomcat/conf/logging.properties
+15-Nov-2023 04:14:05.243 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+15-Nov-2023 04:14:05.243 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+15-Nov-2023 04:14:05.244 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+15-Nov-2023 04:14:05.244 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+15-Nov-2023 04:14:05.244 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+15-Nov-2023 04:14:05.245 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+15-Nov-2023 04:14:05.245 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util=ALL-UNNAMED
+15-Nov-2023 04:14:05.245 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+15-Nov-2023 04:14:05.246 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+15-Nov-2023 04:14:05.246 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/usr/local/tomcat
+15-Nov-2023 04:14:05.247 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/usr/local/tomcat
+15-Nov-2023 04:14:05.247 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/usr/local/tomcat/temp
+15-Nov-2023 04:14:05.253 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Loaded Apache Tomcat Native library [2.0.6] using APR version [1.7.0].
+15-Nov-2023 04:14:05.259 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL successfully initialized [OpenSSL 3.0.2 15 Mar 2022]
+15-Nov-2023 04:14:05.769 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+15-Nov-2023 04:14:05.818 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [846] milliseconds
+15-Nov-2023 04:14:05.896 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+15-Nov-2023 04:14:05.896 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/10.1.15]
+15-Nov-2023 04:14:05.916 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+15-Nov-2023 04:14:05.950 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [130] milliseconds
+[ec2-user@ip-172-31-28-235 ~]$
+
+=====================================================================================================
+
+25. Check if ubuntu conatiner is running? If no, start one in attached mode to the terminal
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker ps
+CONTAINER ID   IMAGE     COMMAND             CREATED         STATUS         PORTS      NAMES
+73ddd4e5ffa3   tomcat    "catalina.sh run"   6 minutes ago   Up 6 minutes   8080/tcp   tomcat3
+[ec2-user@ip-172-31-28-235 ~]$ docker run -it --name=ubuntu ubuntu sleep 1000
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from library/ubuntu
+aece8493d397: Pull complete
+Digest: sha256:2b7412e6465c3c7fc5bb21d3e6f1917c167358449fecac8176c6e496e5c1f05f
+Status: Downloaded newer image for ubuntu:latest
+
+==========================================================================================================
+
+26. Login as root user in ubuntu container
+
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker run -it --user=root ubuntu:20.04 /bin/bash
+root@373477cd5423:/#
+
+
+
+========================================================================================================
+
+27. Create a file with any name in root directory
+
+
+
+
+root@373477cd5423:/# cd /root/directory
+bash: cd: /root/directory: No such file or directory
+root@373477cd5423:/# pwd
+/
+root@373477cd5423:/# pwd
+/
+root@373477cd5423:/# mkdir /root/directory
+root@373477cd5423:/# pwd
+/
+root@373477cd5423:/# cd /root/directory
+root@373477cd5423:~/directory# pwd
+/root/directory
+root@373477cd5423:~/directory# touch dockerfile.txt
+root@373477cd5423:~/directory# ls
+dockerfile.txt
+root@373477cd5423:~/directory#
+
+============================================================================================================
+
+
+28. Install software of your choice in ubuntu container using "apt-get install"
+
+
+
+[ec2-user@ip-172-31-28-235 ~]$ touch installSoftware.txt
+[ec2-user@ip-172-31-28-235 ~]$ vi installSoftware.txt
+[ec2-user@ip-172-31-28-235 ~]$
+
+
+
+FROM Ubuntu
+RUN apt-get update && apt-get -y install python
+COPY . /opt/
+EXPOSE 8080
+WORKDIR /opt
+ENTRYPOINT ["python","app.py]
+~
+
+
+
+==================================================================================================================================================
+
+29. Now exit the ubuntu shell, are you back to your host machine, if not, come back to the host machine.
+
+
+esc:wq
+
+docker ps
+
+=====================================================================================================================================
+30. Check if the ubuntu container is running.
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker ps
+CONTAINER ID   IMAGE          COMMAND             CREATED       STATUS       PORTS      NAMES
+373477cd5423   ubuntu:20.04   "/bin/bash"         5 hours ago   Up 5 hours              vibrant_thompson
+73ddd4e5ffa3   tomcat         "catalina.sh run"   5 hours ago   Up 5 hours   8080/tcp   tomcat3
+[ec2-user@ip-172-31-28-235 ~]$
+======================================================================================================================================================
+
+31. Create a new ubuntu container out of the same image as that previous container in attached mode.
+
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker ps
+CONTAINER ID   IMAGE          COMMAND             CREATED       STATUS       PORTS      NAMES
+373477cd5423   ubuntu:20.04   "/bin/bash"         5 hours ago   Up 5 hours              vibrant_thompson
+73ddd4e5ffa3   tomcat         "catalina.sh run"   5 hours ago   Up 5 hours   8080/tcp   tomcat3
+[ec2-user@ip-172-31-28-235 ~]$
+
+[ec2-user@ip-172-31-28-235 ~]$ docker run -d --name=vibrant1 ubuntu:20.04
+d6c455437b0c6ff6ae493ed6025847d2fc4fcc368de5bb37820913ec488d4c8e
+[ec2-user@ip-172-31-28-235 ~]$
+
+========================================================================================================================================================
+
+32. Login as a root user
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker run -d --name=vibrant1 ubuntu:20.04 sleep 1000
+9bedd65a162ed1c9efdab547b3bc7721bb8d3c24e187d4f5c658dabf6a279f98
+[ec2-user@ip-172-31-28-235 ~]$ docker ps
+CONTAINER ID   IMAGE          COMMAND             CREATED          STATUS          PORTS      NAMES
+9bedd65a162e   ubuntu:20.04   "sleep 1000"        22 seconds ago   Up 21 seconds              vibrant1
+373477cd5423   ubuntu:20.04   "/bin/bash"         5 hours ago      Up 5 hours                 vibrant_thompson
+73ddd4e5ffa3   tomcat         "catalina.sh run"   6 hours ago      Up 6 hours      8080/tcp   tomcat3
+[ec2-user@ip-172-31-28-235 ~]$ docker exec -u root vibrant1 /bin/bash
+[ec2-user@ip-172-31-28-235 ~]$ docker exec -u root -it vibrant1 /bin/bash
+root@9bedd65a162e:/# pwd
+/
+root@9bedd65a162e:/#
+=====================================================================================================================================================
+33. Check if you can see the file created in previous container, you will not see the file as well as software that you installed in the previous container. Now kill this Container.
+
+[ec2-user@ip-172-31-28-235 ~]$ docker stop vibrant1
+vibrant1
+[ec2-user@ip-172-31-28-235 ~]$ docker kill vibrant1
+Error response from daemon: Cannot kill container: vibrant1: Container 9bedd65a162ed1c9efdab547b3bc7721bb8d3c24e187d4f5c658dabf6a279f98 is not running
+[ec2-user@ip-172-31-28-235 ~]$ docker ps
+CONTAINER ID   IMAGE          COMMAND             CREATED         STATUS         PORTS      NAMES
+801888b685be   ubuntu:20.04   "sleep 1000"        9 minutes ago   Up 9 minutes              vibrant22
+373477cd5423   ubuntu:20.04   "/bin/bash"         6 hours ago     Up 6 hours                vibrant_thompson
+73ddd4e5ffa3   tomcat         "catalina.sh run"   6 hours ago     Up 6 hours     8080/tcp   tomcat3
+[ec2-user@ip-172-31-28-235 ~]$ docker rm vibrant1
+vibrant1
+[ec2-user@ip-172-31-28-235 ~]$
+
+=====================================================================================================================================================
+
+Create an Image out of the existing container
+
+
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker ps
+CONTAINER ID   IMAGE          COMMAND             CREATED          STATUS          PORTS      NAMES
+801888b685be   ubuntu:20.04   "sleep 1000"        12 minutes ago   Up 12 minutes              vibrant22
+373477cd5423   ubuntu:20.04   "/bin/bash"         6 hours ago      Up 6 hours                 vibrant_thompson
+73ddd4e5ffa3   tomcat         "catalina.sh run"   6 hours ago      Up 6 hours      8080/tcp   tomcat3
+[ec2-user@ip-172-31-28-235 ~]$ docker commit vibrant22 customimage:version1.0
+sha256:396087e4ff97f1486291c0817f07a97dc8d143acd56c0f1384278d7b5e14a6e0
+[ec2-user@ip-172-31-28-235 ~]$
+
+========================================================================================================================================================
+
+
+Now Create a Container out of this image and login into it to see if you can see the file and software installed by you in the previous container.
+
+
+
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker commit vibrant22 customimage:version1.0
+sha256:396087e4ff97f1486291c0817f07a97dc8d143acd56c0f1384278d7b5e14a6e0
+[ec2-user@ip-172-31-28-235 ~]$ ^C
+[ec2-user@ip-172-31-28-235 ~]$
+[ec2-user@ip-172-31-28-235 ~]$
+[ec2-user@ip-172-31-28-235 ~]$ docker run -d -it customimage:version1.0 /bin/bash
+d624da4995a1a80754fbd7ffbaea8d16efc7abdea0b5fa85215171610169c55a
+[ec2-user@ip-172-31-28-235 ~]$ ls
+installSoftware.txt
+[ec2-user@ip-172-31-28-235 ~]$ which Ubuntu:20.04
+/usr/bin/which: no Ubuntu:20.04 in (/home/ec2-user/.local/bin:/home/ec2-user/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin)
+[ec2-user@ip-172-31-28-235 ~]$ vi installSoftware.txt
+[ec2-user@ip-172-31-28-235 ~]$ which python
+/usr/bin/which: no python in (/home/ec2-user/.local/bin:/home/ec2-user/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin)
+[ec2-user@ip-172-31-28-235 ~]$
+
+
+===================================================================================================
+
+
+Do you have running tomcat container? If yes, Stop it and kill all tomcat container.
+
+
+
+[ec2-user@ip-172-31-28-235 ~]$ docker ps
+CONTAINER ID   IMAGE                    COMMAND             CREATED         STATUS         PORTS      NAMES
+d624da4995a1   customimage:version1.0   "/bin/bash"         8 minutes ago   Up 8 minutes              hardcore_mclean
+373477cd5423   ubuntu:20.04             "/bin/bash"         6 hours ago     Up 6 hours                vibrant_thompson
+73ddd4e5ffa3   tomcat                   "catalina.sh run"   6 hours ago     Up 6 hours     8080/tcp   tomcat3
+[ec2-user@ip-172-31-28-235 ~]$ docker stop tomcat3
+tomcat3
+[ec2-user@ip-172-31-28-235 ~]$ docker kill tomcat3
+Error response from daemon: Cannot kill container: tomcat3: Container 73ddd4e5ffa3e265fba96004381ca40a3091f1bea6c098b65e85d20fdc35639e is not running
+[ec2-user@ip-172-31-28-235 ~]$
+
+
+
+
+
+
