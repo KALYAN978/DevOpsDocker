@@ -1,0 +1,724 @@
+===========================================================================================================
+
+           
+    __ ______  ____  ________ __ __    ____ 
+   / //_/ __ \/ __ \/ ____/ //_// /   / __ \
+  / ,< / / / / / / / __/ / ,<  / /   / / / /
+ / /| / /_/ / /_/ / /___/ /| |/ /___/ /_/ / 
+/_/ |_\____/_____/_____/_/ |_/_____/\____/  
+                                            
+   __  ______ 
+  / / / / __ \
+ / / / / / / /
+/ /_/ / /_/ / 
+\____/_____/  
+              
+     All rights reserved                       
+$ touch Dockerfile
+$ vi Dockerfile
+
+
+FROM node:10-alpine
+WORKDIR /app
+COPY . .
+RUN yarn install --production
+CMD ["node", "/app/src/index.js"]
+
+
+$ docker build -t docker-101 .
+Sending build context to Docker daemon  557.Sending build context to Docker daemon  2.78Sending build context to Docker daemon  3.216MB
+Step 1/5 : FROM node:10-alpine
+10-alpine: Pulling from library/node
+ddad3d7c1e96: Pull complete 
+de915e575d22: Pull complete 
+7150aa69525b: Pull complete 
+d7aa47be044e: Pull complete 
+Digest: sha256:dc98dac24efd4254f75976c40bce46944697a110d06ce7fa47e7268470cf2e28
+Status: Downloaded newer image for node:10-alpine
+ ---> aa67ba258e18
+Step 2/5 : WORKDIR /app
+ ---> Running in 488a113b4f78
+Removing intermediate container 488a113b4f78
+ ---> 5f995a705e36
+Step 3/5 : COPY . .
+ ---> c7082d278516
+Step 4/5 : RUN yarn install --production
+ ---> Running in 6cac6b34182d
+yarn install v1.22.5
+info No lockfile found.
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+[3/4] Linking dependencies...
+[4/4] Building fresh packages...
+success Saved lockfile.
+Done in 0.19s.
+Removing intermediate container 6cac6b34182d
+ ---> d719a53cfdbd
+Step 5/5 : CMD ["node", "/app/src/index.js"]
+ ---> Running in ca9c42377aa1
+Removing intermediate container ca9c42377aa1
+ ---> e4059261d624
+Successfully built e4059261d624
+Successfully tagged docker-101:latest
+$ 
+
+Start your container using the docker run command:
+
+$ docker run -dp 3000:3000 docker-101
+8754151d0e9d9836b2fcb6b33e6d1d52f4e0d481b98c87b89e81be75d81737dc
+$ 
+
+
+> $ docker run -dp 3000:3000 docker-101
+8754151d0e9d9836b2fcb6b33e6d1d52f4e0d481b98c87b89e81be75d81737dc
+$ docker build -t docker-101 .
+Sending build context to Docker daemon  55Sending build context to Docker daemon  3.216MB
+Step 1/5 : FROM node:10-alpine
+ ---> aa67ba258e18
+Step 2/5 : WORKDIR /app
+ ---> Using cache
+ ---> 5f995a705e36
+Step 3/5 : COPY . .
+ ---> Using cache
+ ---> c7082d278516
+Step 4/5 : RUN yarn install --production
+ ---> Using cache
+ ---> d719a53cfdbd
+Step 5/5 : CMD ["node", "/app/src/index.js"]
+ ---> Using cache
+ ---> e4059261d624
+Successfully built e4059261d624
+Successfully tagged docker-101:latest
+$ 
+
+
+>> $ docker run -dp 3000:3000 docker-101
+8681e988693849db54c33859634e4e63e98b6f773192a5dbb3f9d04b667aeeef
+$ 
+
+
+
+>> $ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+$ docker ps -a
+CONTAINER ID   IMAGE        COMMAND                  CREATED          STATUS                      PORTS     NAMES
+8681e9886938   docker-101   "docker-entrypoint.s…"   44 seconds ago   Exited (1) 42 seconds ago             exciting_kepler
+8754151d0e9d   docker-101   "docker-entrypoint.s…"   2 minutes ago    Exited (1) 2 minutes ago              gallant_spence
+$ docker rm docker exciting_kepler
+exciting_kepler
+Error: No such container: docker
+$ 
+
+
+
+$ docker run -dp 3000:3000 docker-101
+ab704d5278bb6afbfdbd1d0a77048ac810e70cb9a5c6cc46de4b5392bb9d6665
+$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+$ 
+
+
+
+>> $ docker ps -a
+CONTAINER ID   IMAGE        COMMAND                  CREATED          STATUS                      PORTS     NAMES
+ab704d5278bb   docker-101   "docker-entrypoint.s…"   35 seconds ago   Exited (1) 32 seconds ago             epic_ptolemy
+8754151d0e9d   docker-101   "docker-entrypoint.s…"   4 minutes ago    Exited (1) 4 minutes ago              gallant_spence
+$ docker image ls
+REPOSITORY                      TAG         IMAGE ID       CREATED         SIZE
+docker-101                      latest      e4059261d624   6 minutes ago   85.9MB
+redis                           latest      eca1379fe8b5   7 months ago    117MB
+mysql                           latest      8189e588b0e8   7 months ago    564MB
+nginx                           latest      6efc10a0510f   7 months ago    142MB
+postgres                        latest      ceccf204404e   7 months ago    379MB
+nginx                           alpine      8e75cbc5b25c   7 months ago    41MB
+alpine                          latest      9ed4aefc74f6   7 months ago    7.04MB
+ubuntu                          latest      08d22c0ceb15   8 months ago    77.8MB
+node                            10-alpine   aa67ba258e18   2 years ago     82.7MB
+kodekloud/simple-webapp-mysql   latest      129dd9f67367   5 years ago     96.6MB
+kodekloud/simple-webapp         latest      c6e3cd9aae36   5 years ago     84.8MB
+$ docker image prune
+WARNING! This will remove all dangling images.
+Are you sure you want to continue? [y/N] y
+Total reclaimed space: 0B
+$ 
+
+
+>> $ docker login   
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: kalyanjs
+Password: 
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+$ 
+
+
+
+>> Use the docker tag command to give the docker-101 image a new name. Be sure to swap out YOUR-USER-NAME with your Docker ID.
+docker tag docker-101 YOUR-USER-NAME/101-todo-app
+
+
+Now try your push command again. If you're copying the value from Docker Hub, you can drop the tagname portion, as we didn't add a tag to the image name.
+
+
+docker push YOUR-USER-NAME/101-todo-app
+
+
+>> $ docker run -dp 3000:3000 kalyanjs/101-todo-app
+1057e4b77fe2a212ba526607dded03fff20b9142797140ed8b67eb8d9e181e8c
+$ 
+
+
+
+
+Persisting our DB:
+
+In case you didn't notice, our todo list is being wiped clean every single time we launch the container. Why is this? Let's dive into how the container is working.
+
+The Container's Filesystem:
+
+When a container runs, it uses the various layers from an image for its filesystem. Each container also gets its own "scratch space" to create/update/remove files. Any changes won't be seen in another container, even if they are using the same image.
+
+
+
+
+
+we're going to start two containers and create a file in each. What you'll see is that the files created in one container aren't available in another.
+Start a ubuntu container that will create a file named /data.txt with a random number between 1 and 10000.
+
+
+docker run -d ubuntu bash -c "shuf -i 1-10000 -n 1 -o /data.txt && tail -f /dev/null"
+
+
+
+$ docker run -d ubuntu bash -c "shuf -i 1-10000 -n 1 -o /data.txt && tail -f /dev/null"
+6e2a248e03bb5d03f12401faf5bf50240ed1e01f953aee54d9892e694e91c9f7
+$ 
+
+In case you're wondering about the command, we're starting a bash shell and invoking two commands (why we have the &&). The first portion picks a single random number and writes it to /data.txt. The second command is simply watching a file to keep the container running.
+
+
+
+>> $ docker exec 6e2a cat /data.txt
+7563
+$ 
+
+
+>> $ docker run -it ubuntu ls /
+bin   dev  home  lib32  libx32  mnt  proc  run     srv  tmp  var
+boot  etc  lib   lib64  media   opt  root  sbin  sys  usr
+$ 
+
+
+
+>> $ docker rm -f 6e2a
+6e2a
+$ 
+
+
+>> 
+Container Volumes¶:
+
+Volumes provide the ability to connect specific filesystem paths of the container back to the host machine. If a directory in the container is mounted, changes in that directory are also seen on the host machine. If we mount that same directory across container restarts, we'd see the same files.
+
+There are two main types of volumes:
+
+
+Persisting our Todo Data¶
+By default, the todo app stores its data in a SQLite Database at /etc/todos/todo.db. If you're not familiar with SQLite, no worries! It's simply a relational database in which all of the data is stored in a single file. While this isn't the best for large-scale applications, it works for small demos. We'll talk about switching this to an actual database engine later.
+
+With the database being a single file, if we can persist that file on the host and make it available to the next container, it should be able to pick up where the last one left off. By creating a volume and attaching (often called "mounting") it to the directory the data is stored in, we can persist the data. As our container writes to the todo.db file, it will be persisted to the host in the volume.
+
+As mentioned, we are going to use a named volume. Think of a named volume as simply a bucket of data. Docker maintains the physical location on the disk and you only need to remember the name of the volume. Every time you use the volume, Docker will make sure the correct data is provided.
+
+
+
+>> $ docker volume create todo-db
+todo-db
+$ 
+
+
+>> $ docker run -dp 3000:3000 -v todo-db:/etc/todos docker-101
+b0967afc7c29bc315cbbe1c3c34a2bea6931731491220813b6c6508ce4c0d071
+$ 
+
+
+>> $ docker rm -f b096
+b096
+$ 
+
+
+>> $ docker run -dp 3000:3000 -v todo-db:/etc/todos docker-101
+54b9c5d131deedf3e15adadab7ffe495bda3cb7a4700d0dc5bb00590180e3861
+$ 
+
+
+>> $ docker rm -f 54b
+54b
+$ 
+
+
+
+
+Diving into our Volume¶
+A lot of people frequently ask "Where is Docker actually storing my data when I use a named volume?" If you want to know, you can use the docker volume inspect command.
+
+
+docker volume inspect todo-db
+[
+    {
+        "CreatedAt": "2019-09-26T02:18:36Z",
+        "Driver": "local",
+        "Labels": {},
+        "Mountpoint": "/var/lib/docker/volumes/todo-db/_data",
+        "Name": "todo-db",
+        "Options": {},
+        "Scope": "local"
+    }
+]
+The Mountpoint is the actual location on the disk where the data is stored. Note that on most machines, you will need to have root access to access this directory from the host. But, that's where it is!
+
+
+
+
+
+>> $ docker volume inspect todo-db
+[
+    {
+        "CreatedAt": "2023-11-17T09:03:52Z",
+        "Driver": "local",
+        "Labels": {},
+        "Mountpoint": "/var/lib/docker/volumes/todo-db/_data",
+        "Name": "todo-db",
+        "Options": {},
+        "Scope": "local"
+    }
+]
+$ 
+
+
+>> Using Bind Mounts
+In the previous chapter, we talked about and used a named volume to persist the data in our database. Named volumes are great if we simply want to store data, as we don't have to worry about where the data is stored.
+
+With bind mounts, we control the exact mountpoint on the host. We can use this to persist data, but is often used to provide additional data into containers. When working on an application, we can use a bind mount to mount our source code into the container to let it see code changes, respond, and let us see the changes right away.
+
+For Node-based applications, nodemon is a great tool to watch for file changes and then restart the application. There are equivalent tools in most other languages and frameworks.
+
+
+
+
+
+Starting a Dev-Mode Container¶
+To run our container to support a development workflow, we will do the following:
+
+Mount our source code into the container
+Install all dependencies, including the "dev" dependencies
+Start nodemon to watch for filesystem changes
+So, let's do it!
+
+Make sure you don't have any previous docker-101 containers running.
+
+Run the following command. We'll explain what's going on afterwards:
+
+
+docker run -dp 3000:3000 \
+    -w /app -v $PWD:/app \
+    node:10-alpine \
+    sh -c "yarn install && yarn run dev"
+-dp 3000:3000 - same as before. Run in detached (background) mode and create a port mapping
+-w /app - sets the "working directory" or the current directory that the command will run from
+node:10-alpine - the image to use. Note that this is the base image for our app from the Dockerfile
+sh -c "yarn install && yarn run dev" - the command. We're starting a shell using sh (alpine doesn't have bash) and running yarn install to install all dependencies and then running yarn run dev. If we look in the package.json, we'll see that the dev script is starting nodemon.
+
+
+
+>> $ docker run -dp 3000:3000 \
+> -w /app -v $PWD:/app \
+> node:10-alpine \
+> sh -c "yarn install && yarn run dev"
+c06f2deafd3a9a13908e6baf9233b88ab8d0024c5a3c2b76e54463821853cd26
+$ 
+
+
+>> $ docker logs -f c06
+yarn install v1.22.5
+info No lockfile found.
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+[3/4] Linking dependencies...
+[4/4] Building fresh packages...
+success Saved lockfile.
+Done in 0.27s.
+yarn run v1.22.5
+error Couldn't find a package.json file in "/app"
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+$ 
+
+
+
+>> $ docker build -t docker-101 .
+Sending build context to Docker daemon  55Sending build context to Docker daemon  2.Sending build context to Docker daemon   3.22MB
+Step 1/5 : FROM node:10-alpine
+ ---> aa67ba258e18
+Step 2/5 : WORKDIR /app
+ ---> Using cache
+ ---> 5f995a705e36
+Step 3/5 : COPY . .
+ ---> b71d6293f2eb
+Step 4/5 : RUN yarn install --production
+ ---> Running in 780825afb985
+yarn install v1.22.5
+[1/4] Resolving packages...
+success Nothing to install.
+success Saved lockfile.
+Done in 0.20s.
+Removing intermediate container 780825afb985
+ ---> bce72a41764b
+Step 5/5 : CMD ["node", "/app/src/index.js"]
+ ---> Running in 019d22fc5e36
+Removing intermediate container 019d22fc5e36
+ ---> 39377c432a14
+Successfully built 39377c432a14
+Successfully tagged docker-101:latest
+$ 
+
+
+Using bind mounts is very common for local development setups. The advantage is that the dev machine doesn't need to have all of the build tools and environments installed. With a single docker run command, the dev environment is pulled and ready to go. We'll talk about Docker Compose in a future step, as this will help simplify our commands (we're already getting a lot of flags).
+
+
+
+
+
+
+
+
+Multi-Container Apps
+Up to this point, we have been working with single container apps. But, we now want to add MySQL to the application stack. The following question often arises - "Where will MySQL run? Install it in the same container or run it separately?" In general, each container should do one thing and do it well. A few reasons:
+
+There's a good chance you'd have to scale APIs and front-ends differently than databases
+Separate containers let you version and update versions in isolation
+While you may use a container for the database locally, you may want to use a managed service for the database in production. You don't want to ship your database engine with your app then.
+Running multiple processes will require a process manager (the container only starts one process), which adds complexity to container startup/shutdown
+And there are more reasons. So, we will update our application to work like this:
+
+Todo App connected to MySQL container
+
+Container Networking¶
+Remember that containers, by default, run in isolation and don't know anything about other processes or containers on the same machine. So, how do we allow one container to talk to another? The answer is networking. Now, you don't have to be a network engineer (hooray!). Simply remember this rule...
+
+If two containers are on the same network, they can talk to each other. If they aren't, they can't.
+
+Starting MySQL¶
+There are two ways to put a container on a network: 1) Assign it at start or 2) connect an existing container. For now, we will create the network first and attach the MySQL container at startup.
+
+
+
+
+
+>> $ docker network create todo-app
+ae67faca5831d4ebbe1099bd0e498c1afa198f87addfbfc7500524d23ba0ef03
+$ 
+
+
+
+>> 
+Start a MySQL container and attach it the network. We're also going to define a few environment variables that the database will use to initialize the database (see the "Environment Variables" section in the MySQL Docker Hub listing).
+
+
+docker run -d \
+    --network todo-app --network-alias mysql \
+    -v todo-mysql-data:/var/lib/mysql \
+    -e MYSQL_ROOT_PASSWORD=secret \
+    -e MYSQL_DATABASE=todos \
+    mysql:5.7
+
+
+
+>> $ docker run -d \
+> --network todo-app --network-alias mysql \
+> -v todo-mysql-data:/var/lib/mysql \
+> -e MYSQL_ROOR_PASSWORD=secret \
+> -e MYSQL_DATABASE=todos \
+> mysql:5.7
+Unable to find image 'mysql:5.7' locally
+5.7: Pulling from library/mysql
+11a38aebcb7a: Pull complete 
+91ab01309bd6: Pull complete 
+6c91fabb88c2: Pull complete 
+8f46e806ab5c: Pull complete 
+29f5af1d1661: Pull complete 
+62aca7179a54: Pull complete 
+85023e6de3be: Pull complete 
+6d5934a87cbb: Pull complete 
+c878502d3f70: Pull complete 
+4756467c684a: Pull complete 
+ee9043dd2677: Pull complete 
+Digest: sha256:f566819f2eee3a60cf5ea6c8b7d1bfc9de62e34268bf62dc34870c4fca8a85d1
+Status: Downloaded newer image for mysql:5.7
+97f0d1f5767c8ef03fa9c11d30d9f50e6d192038c7412ceff42a12583c6f6197
+$ 
+
+
+>> $ docker exec -it 97f0 mysql -p
+Error response from daemon: Container 97f0d1f5767c8ef03fa9c11d30d9f50e6d192038c7412ceff42a12583c6f6197 is not running
+$ 
+
+
+
+>> 
+     When the password prompt comes up, type in secret. In the MySQL shell, list the databases and verify you see the todos database.
+
+
+mysql> SHOW DATABASES;
+You should see output that looks like this:
+
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| todos              |
++--------------------+
+5 rows in set (0.00 sec)
+Hooray! We have our todos database and it's ready for us to use!
+
+
+
+
+>> Connecting to MySQL¶:
+
+
+If we run another container on the same network, how do we find the container (remember each container has its own IP address)?
+
+To figure it out, we're going to make use of the nicolaka/netshoot container, which ships with a lot of tools that are useful for troubleshooting or debugging networking issues.
+
+Start a new container using the nicolaka/netshoot image. Make sure to connect it to the same network.
+
+
+docker run -it --network todo-app nicolaka/netshoot
+
+
+
+
+>> $ docker run -it --network todo-app nicolaka/netshoot
+Unable to find image 'nicolaka/netshoot:latest' locally
+latest: Pulling from nicolaka/netshoot
+8a49fdb3b6a5: Pull complete 
+f08cc7654b42: Pull complete 
+bacdb080ad6d: Pull complete 
+df75a2676b1d: Pull complete 
+d30ac41fb6a9: Pull complete 
+3f3eebe79603: Pull complete 
+086410b5650d: Pull complete 
+4f4fb700ef54: Pull complete 
+5a7fe97d184f: Pull complete 
+a6d1b2d7a50e: Pull complete 
+599ae1c27c63: Pull complete 
+dd5e50b27eb9: Pull complete 
+2681a5bf3176: Pull complete 
+2517e0a2f862: Pull complete 
+7b5061a1528d: Pull complete 
+Digest: sha256:a7c92e1a2fb9287576a16e107166fee7f9925e15d2c1a683dbb1f4370ba9bfe8
+Status: Downloaded newer image for nicolaka/netshoot:latest
+                    dP            dP                           dP   
+                    88            88                           88   
+88d888b. .d8888b. d8888P .d8888b. 88d888b. .d8888b. .d8888b. d8888P 
+88'  `88 88ooood8   88   Y8ooooo. 88'  `88 88'  `88 88'  `88   88   
+88    88 88.  ...   88         88 88    88 88.  .88 88.  .88   88   
+dP    dP `88888P'   dP   `88888P' dP    dP `88888P' `88888P'   dP   
+                                                                    
+Welcome to Netshoot! (github.com/nicolaka/netshoot)
+Version: 0.11
+
+                                         
+
+
+ 0b90f9b5ec9c  ~  
+ 0b90f9b5ec9c  ~  dig mysql
+
+; <<>> DiG 9.18.13 <<>> mysql
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 47863
+;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 0
+
+;; QUESTION SECTION:
+;mysql.                         IN      A
+
+;; Query time: 4 msec
+;; SERVER: 127.0.0.11#53(127.0.0.11) (UDP)
+;; WHEN: Fri Nov 17 09:30:55 UTC 2023
+;; MSG SIZE  rcvd: 23
+
+
+ 0b90f9b5ec9c  ~  
+
+
+In the "ANSWER SECTION", you will see an A record for mysql that resolves to 172.23.0.2 (your IP address will most likely have a different value). While mysql isn't normally a valid hostname, Docker was able to resolve it to the IP address of the container that had that network alias (remember the --network-alias flag we used earlier?).
+
+What this means is... our app only simply needs to connect to a host named mysql and it'll talk to the database! It doesn't get much simpler than that!
+
+
+
+
+unning our App with MySQL¶
+The todo app supports the setting of a few environment variables to specify MySQL connection settings. They are:
+
+MYSQL_HOST - the hostname for the running MySQL server
+MYSQL_USER - the username to use for the connection
+MYSQL_PASSWORD - the password to use for the connection
+MYSQL_DB - the database to use once connected
+
+
+
+
+
+
+
+
+
+
+With all of that explained, let's start our dev-ready container!
+
+We'll specify each of the environment variables above, as well as connect the container to our app network.
+
+
+docker run -dp 3000:3000 \
+  -w /app -v $PWD:/app \
+  --network todo-app \
+  -e MYSQL_HOST=mysql \
+  -e MYSQL_USER=root \
+  -e MYSQL_PASSWORD=secret \
+  -e MYSQL_DB=todos \
+  node:10-alpine \
+  sh -c "yarn install && yarn run dev"
+
+
+
+
+
+>> $ docker run -dp 3000:3000 \
+> -w /app -v $PWD:/app \
+> --network todo-app \
+> -e MYSQL_HOST=mysql \
+> -e MYSQL_USER=root \
+> -e mysql_DB=todos \
+> node:10-alpine \
+> sh -c "yarn install && yarn run dev"
+a9124a49660b2169d79270d6086c775df716d9ceb37618c8e14b7685843000a9
+$ 
+
+
+
+>> $ docker logs a912
+yarn install v1.22.5
+[1/4] Resolving packages...
+success Already up-to-date.
+Done in 0.21s.
+yarn run v1.22.5
+error Couldn't find a package.json file in "/app"
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+$ 
+
+
+
+
+
+
+
+
+Connect to the mysql database and prove that the items are being written to the database. Remember, the password is secret.
+
+>> Connect to the mysql database and prove that the items are being written to the database. Remember, the password is secret.
+
+
+docker exec -ti <mysql-container-id> mysql -p todos
+And in the mysql shell, run the following:
+
+
+mysql> select * from todo_items;
++--------------------------------------+--------------------+-----------+
+| id                                   | name               | completed |
++--------------------------------------+--------------------+-----------+
+| c906ff08-60e6-44e6-8f49-ed56a0853e85 | Do amazing things! |         0 |
+| 2912a79e-8486-4bc3-a4c5-460793a575ab | Be awesome!        |         0 |
++--------------------------------------+--------------------+-----------+
+Obviously, your table will look different because it has your items. But, you should see them stored there!
+
+
+
+
+
+>> $ touch docker-compose.yml
+$ vi docker-compose.yml
+
+
+
+>> version: "3.7"
+
+services:
+  app:
+    image: node:10-alpine
+    command: sh -c "yarn install && yarn run dev"
+    ports:
+      - 3000:3000
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+      MYSQL_DB: todos
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - todo-mysql-data:/var/lib/mysql
+    environment: 
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: todos
+
+volumes:
+  todo-mysql-data:
+
+
+
+>> docker-compose up -d
+
+
+
+>> docker image history
+
+
+
+>> You'll notice that several of the lines are truncated. If you add the --no-trunc flag, you'll get the full output (yes... funny how you use a truncated flag to get untruncated output, huh?)
+
+
+docker image history --no-trunc docker-101
+
+
+
+Update the Dockerfile to copy in the package.json first, install dependencies, and then copy everything else in.
+
+
+FROM node:10-alpine
+WORKDIR /app
+COPY package.json yarn.lock ./
+RUN yarn install --production
+COPY . .
+CMD ["node", "/app/src/index.js"]
+Build a new image using docker build.
+
+
+>> docker build -t docker-101 .
+
+
+
+
+
