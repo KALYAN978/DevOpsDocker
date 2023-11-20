@@ -1,0 +1,18 @@
+
+public class Constructor {
+	int id;
+	String name;
+	
+	void display() {
+		System.out.println(id+ " " +name);
+	}
+
+	public static void main(String[] args) {
+		Constructor cons = new Constructor();
+		Constructor cons1 = new Constructor();
+	cons.display();
+	cons1.display();
+
+	}
+
+}

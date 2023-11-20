@@ -1,0 +1,25 @@
+
+public class Constructor {
+	int id;
+	String name;
+	
+	
+	void display() {
+		System.out.println(id+ " " +name);
+	}
+
+	
+	Constructor(int i,String n){
+		this.i = id;
+		this.n = name;
+	}
+	
+	public static void main(String[] args) {
+		Constructor cons = new Constructor(1, "kaala");
+		Constructor cons1 = new Constructor(0, "shiva");
+	cons.display();
+	cons1.display();
+
+	}
+
+}

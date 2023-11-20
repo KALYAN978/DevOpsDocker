@@ -1,0 +1,24 @@
+
+public class Constructor {
+	
+	int id;
+	String name;
+	int age;
+	
+	Constructor(int id,String n,int age){
+		this.id = id;
+		n = name;
+		this.age = age;
+	}
+	
+	void display() {
+		System.out.println(id+" "+name+" "+age);
+	}
+	
+	public static void main(String[] args) {
+		Constructor cons = new Constructor(1, "name", 0);
+
+		cons.display();
+	}
+
+}
