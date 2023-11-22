@@ -1,0 +1,113 @@
+First create a redis database container called redis, image redis:alpine.
+
+
+
+$ docker run -d redis redis:alpine
+e5d77d90924a1d288c166dfca7f76849d4e5155451099e520e690a87f0f9c903
+$ 
+$ docker run -d name=redis redis:alpine
+docker: invalid reference format.
+See 'docker run --help'.
+$ docker run -d --name=redis redis:alpine
+Unable to find image 'redis:alpine' locally
+alpine: Pulling from library/redis
+96526aa774ef: Pull complete 
+b11f9c76abbd: Pull complete 
+6617b52cbeba: Pull complete 
+d690774d7e1a: Pull complete 
+7c08c8068f7a: Pull complete 
+4f4fb700ef54: Pull complete 
+ea389a5fca7b: Pull complete 
+Digest: sha256:2d44eb73209e5af4118de67e89b01709bfec7cc5a4c1cec29665f6d011c70783
+Status: Downloaded newer image for redis:alpine
+74d2e6781b7cd2abd3fbfb481e20462440a76d1b2001fc3770deade8f7075287
+$ 
+
+===================================================================================================
+
+Next, create a simple container called clickcounter with the image kodekloud/click-counter, link it to the redis container that we created in the previous task and then expose it on the host port 8085
+The clickcounter app run on port 5000.
+
+
+$ docker run -d --link redis:redis --name=clickcounter -p 8085:5000 kodekloud/click-counter
+Unable to find image 'kodekloud/click-counter:latest' locally
+latest: Pulling from kodekloud/click-counter
+540db60ca938: Pull complete 
+a7ad1a75a999: Pull complete 
+37ce6546d5dd: Pull complete 
+ec9e91bed5a2: Pull complete 
+767433e10bb0: Pull complete 
+156f0b0493cb: Pull complete 
+3fe82d8a2401: Pull complete 
+4a41f7c94204: Pull complete 
+473063430a4f: Pull complete 
+452c68a16ccd: Pull complete 
+Digest: sha256:530e4532a718e8f5cbda05844a6c0638ebe8898fa4c4307ee6afbdd5d1f213db
+Status: Downloaded newer image for kodekloud/click-counter:latest
+6bf13e2294595495a3a7fde40dbf2a2f42d38e241533f22d0e50b6cafb125ef4
+$ 
+
+======================================================================================================
+
+Let's clean up the actions carried out in previous steps. Delete the redis and the clickcounter containers.
+
+$ docker stop redis clickcounter
+redis
+clickcounter
+$ docker rm redis clickcounter
+redis
+clickcounter
+$ 
+
+=========================================================================================================
+
+Create a docker-compose.yml file under the directory /root/clickcounter. Once done, run docker-compose up.
+The compose file should have the exact specification as follows -
+redis service specification - Image name should be redis:alpine.
+clickcounter service specification - Image name should be kodekloud/click-counter, app is run on port 5000 and expose it on the host port 8085 in the compose file.
+
+
+
+$ cd /root/clickcounter
+$ touch docker-compose.yml
+$ vi docker-compose.yml
+$ docker-compose up -d
+Creating network "clickcounter_default" with the default driver
+Creating clickcounter_clickcounter_1 ... done
+Creating clickcounter_redis_1        ... done
+$ ^C
+$ 
+
+========================================================================================================
+
+
+
+Write a Docker file to create and copy a directory and built it using python modules?
+
+
+FROM pyhton:2.7-slim
+
+WORKDIR /app
+
+COPY . /app
+
+docker build –tag
+
+=========================================================================================================
+Where the docker volumes are stored?
+
+You need to navigate:
+ /var/lib/docker/volumes
+=======================================================================================================
+
+How does communication happen between Docker client and Docker Daemon?
+
+
+You can communicate between Docker client and Docker Daemon with the combination of Rest API, socket.IO, and TCP.
+=========================================================================================================
+
+How to use JSON instead of YAML compose file?
+
+
+docker-compose -f docker-compose.json up
+========================================================================================================

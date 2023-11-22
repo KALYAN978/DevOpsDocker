@@ -1,0 +1,446 @@
+What is the version of Docker Server Engine running on the Host?
+
+
+$ sudo docker version
+Client: Docker Engine - Community
+ Version:           20.10.24
+ API version:       1.41
+ Go version:        go1.19.7
+ Git commit:        297e128
+ Built:             Tue Apr  4 18:21:05 2023
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          20.10.24
+  API version:      1.41 (minimum version 1.12)
+  Go version:       go1.19.7
+  Git commit:       5d6db84
+  Built:            Tue Apr  4 18:18:48 2023
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.6.20
+  GitCommit:        2806fc1057397dbaeefbea0e4e17bddfbd388f38
+ runc:
+  Version:          1.1.5
+  GitCommit:        v1.1.5-0-gf19387a
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+$ 
+
+================================================================================================
+
+How many containers are running on this host?
+
+
+$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+$ 
+
+==============================================================================================
+How many images on the are there?
+
+
+$ docker images
+REPOSITORY                      TAG       IMAGE ID       CREATED        SIZE
+redis                           latest    eca1379fe8b5   6 months ago   117MB
+mysql                           latest    8189e588b0e8   6 months ago   564MB
+nginx                           latest    6efc10a0510f   6 months ago   142MB
+postgres                        latest    ceccf204404e   6 months ago   379MB
+nginx                           alpine    8e75cbc5b25c   7 months ago   41MB
+alpine                          latest    9ed4aefc74f6   7 months ago   7.04MB
+ubuntu                          latest    08d22c0ceb15   8 months ago   77.8MB
+kodekloud/simple-webapp-mysql   latest    129dd9f67367   5 years ago    96.6MB
+kodekloud/simple-webapp         latest    c6e3cd9aae36   5 years ago    84.8MB
+$ 
+
+=====================================================================================================
+
+Run a container using the redis image?
+
+
+
+$ dokcer images 
+-bash: dokcer: command not found
+$ docker images
+REPOSITORY                      TAG       IMAGE ID       CREATED        SIZE
+redis                           latest    eca1379fe8b5   6 months ago   117MB
+mysql                           latest    8189e588b0e8   6 months ago   564MB
+nginx                           latest    6efc10a0510f   6 months ago   142MB
+postgres                        latest    ceccf204404e   6 months ago   379MB
+nginx                           alpine    8e75cbc5b25c   7 months ago   41MB
+alpine                          latest    9ed4aefc74f6   7 months ago   7.04MB
+ubuntu                          latest    08d22c0ceb15   8 months ago   77.8MB
+kodekloud/simple-webapp-mysql   latest    129dd9f67367   5 years ago    96.6MB
+kodekloud/simple-webapp         latest    c6e3cd9aae36   5 years ago    84.8MB
+$ ^C
+$ 
+$ docker run redis
+1:C 06 Nov 2023 06:46:47.165 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:C 06 Nov 2023 06:46:47.165 # Redis version=7.0.11, bits=64, commit=00000000, modified=0, pid=1, just started
+1:C 06 Nov 2023 06:46:47.165 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+1:M 06 Nov 2023 06:46:47.165 * monotonic clock: POSIX clock_gettime
+1:M 06 Nov 2023 06:46:47.169 * Running mode=standalone, port=6379.
+1:M 06 Nov 2023 06:46:47.169 # Server initialized
+1:M 06 Nov 2023 06:46:47.170 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+1:M 06 Nov 2023 06:46:47.171 * Ready to accept connections
+
+
+====================================================================================================
+
+Stop the container you just created
+
+
+$ docker stop redis
+Error response from daemon: No such container: redis
+$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+$ 
+
+====================================================================================================
+
+How many containers are RUNNING on this host now?
+
+
+$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+$ 
+
+======================================================================================================
+
+How many containers are RUNNING on this host now?
+
+$ docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS          PORTS     NAMES
+5446832ea0be   alpine         "sleep 1000"             31 seconds ago   Up 29 seconds             dreamy_noether
+15ac45dc7dd1   nginx:alpine   "/docker-entrypoint.…"   33 seconds ago   Up 31 seconds   80/tcp    nginx-2
+afc3e5578686   nginx:alpine   "/docker-entrypoint.…"   35 seconds ago   Up 34 seconds   80/tcp    nginx-1
+0a71c0c6623b   ubuntu         "sleep 1000"             37 seconds ago   Up 35 seconds             awesome_northcut
+$ 
+=====================================================================================================
+
+How many containers are PRESENT on the host now?
+Including both Running and Not Running ones
+
+
+$ docker ps -a 
+CONTAINER ID   IMAGE          COMMAND                  CREATED              STATUS                          PORTS     NAMES
+af6ff5c314a1   alpine         "/bin/sh"                About a minute ago   Exited (0) About a minute ago             boring_almeida
+5446832ea0be   alpine         "sleep 1000"             About a minute ago   Up About a minute                         dreamy_noether
+15ac45dc7dd1   nginx:alpine   "/docker-entrypoint.…"   About a minute ago   Up About a minute               80/tcp    nginx-2
+afc3e5578686   nginx:alpine   "/docker-entrypoint.…"   About a minute ago   Up About a minute               80/tcp    nginx-1
+0a71c0c6623b   ubuntu         "sleep 1000"             About a minute ago   Up About a minute                         awesome_northcut
+29ef234217b5   redis          "docker-entrypoint.s…"   4 minutes ago        Exited (0) 3 minutes ago                  wonderful_cartwright
+$ 
+
+=====================================================================================================
+
+What is the image used to run the nginx-1 container?
+
+
+$ docker inspect nginx-1
+[
+    {
+        "Id": "afc3e55786861ae44d64c57c54c1c0c06b166dc93c1df50cd9a67ed5fffbffcb",
+        "Created": "2023-11-06T06:49:37.541725134Z",
+        "Path": "/docker-entrypoint.sh",
+        "Args": [
+            "nginx",
+            "-g",
+            "daemon off;"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 1817,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2023-11-06T06:49:38.683744499Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:8e75cbc5b25c8438fcfe2e7c12c98409d5f161cbb668d6c444e02796691ada70",
+        "ResolvConfPath": "/var/lib/docker/containers/afc3e55786861ae44d64c57c54c1c0c06b166dc93c1df50cd9a67ed5fffbffcb/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/afc3e55786861ae44d64c57c54c1c0c06b166dc93c1df50cd9a67ed5fffbffcb/hostname",
+        "HostsPath": "/var/lib/docker/containers/afc3e55786861ae44d64c57c54c1c0c06b166dc93c1df50cd9a67ed5fffbffcb/hosts",
+        "LogPath": "/var/lib/docker/containers/afc3e55786861ae44d64c57c54c1c0c06b166dc93c1df50cd9a67ed5fffbffcb/afc3e55786861ae44d64c57c54c1c0c06b166dc93c1df50cd9a67ed5fffbffcb-json.log",
+        "Name": "/nginx-1",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "default",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "host",
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "KernelMemory": 0,
+            "KernelMemoryTCP": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": false,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/5cafcb78609e53de3f5bd43146153e85c637dfe67db9e245a2652d44aa0c3de6-init/diff:/var/lib/docker/overlay2/77aba654fa7d0754db8a76b759a35eb402fb616d2b81ee4d3ffd52a744549ca8/diff:/var/lib/docker/overlay2/2c76b0f6063f47900e37b260f7b0551bd2473fb50e19b4ba1efdb8fb3a5956f7/diff:/var/lib/docker/overlay2/f0a7704d58181748af3041f7ae0ddba911adf9cda4189c1bbf6ee44bd0d20b18/diff:/var/lib/docker/overlay2/072505ff81c1905b7a637a4ad0bcde99a5448e51d47436f52379fdcc5e22b0a5/diff:/var/lib/docker/overlay2/a6d14ddc3d6ecc851d09ab0197737447045b3d9f5efdc3301c5406d5490ca320/diff:/var/lib/docker/overlay2/dbdce7100c692d68de17e9b1788af1ad4cdca3a7497956b2cbbbae0e50de7876/diff:/var/lib/docker/overlay2/dee44972369fd13b70e758e8b987b71d6437c89ba439800f462da8fab9bf76f7/diff",
+                "MergedDir": "/var/lib/docker/overlay2/5cafcb78609e53de3f5bd43146153e85c637dfe67db9e245a2652d44aa0c3de6/merged",
+                "UpperDir": "/var/lib/docker/overlay2/5cafcb78609e53de3f5bd43146153e85c637dfe67db9e245a2652d44aa0c3de6/diff",
+                "WorkDir": "/var/lib/docker/overlay2/5cafcb78609e53de3f5bd43146153e85c637dfe67db9e245a2652d44aa0c3de6/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [],
+        "Config": {
+            "Hostname": "afc3e5578686",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "80/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "NGINX_VERSION=1.23.4",
+                "PKG_RELEASE=1",
+                "NJS_VERSION=0.7.11"
+            ],
+            "Cmd": [
+                "nginx",
+                "-g",
+                "daemon off;"
+            ],
+            "Image": "nginx:alpine",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": [
+                "/docker-entrypoint.sh"
+            ],
+            "OnBuild": null,
+            "Labels": {
+                "maintainer": "NGINX Docker Maintainers <docker-maint@nginx.com>"
+            },
+            "StopSignal": "SIGQUIT"
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "57ffb905c0b5ed1994afce67583a281653198104fb6595d8f959035ccbee2810",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {
+                "80/tcp": null
+            },
+            "SandboxKey": "/var/run/docker/netns/57ffb905c0b5",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "1d6e3a940dcc2b9f82004fe51487a28070b1640a14838723f040918e2f600a79",
+            "Gateway": "172.12.0.1",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "172.12.0.3",
+            "IPPrefixLen": 24,
+            "IPv6Gateway": "",
+            "MacAddress": "02:42:ac:0c:00:03",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "ab4899f2f745d2be9d8956a91941a507e76ba83cf8b67509c01bba3b55013327",
+                    "EndpointID": "1d6e3a940dcc2b9f82004fe51487a28070b1640a14838723f040918e2f600a79",
+                    "Gateway": "172.12.0.1",
+                    "IPAddress": "172.12.0.3",
+                    "IPPrefixLen": 24,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:0c:00:03",
+                    "DriverOpts": null
+                }
+            }
+        }
+    }
+]
+$ 
+
+===========================================================================================================
+
+What is the ID of the container that uses the alpine image and is not running?
+
+
+
+$ docker ps -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS                      PORTS     NAMES
+af6ff5c314a1   alpine         "/bin/sh"                7 minutes ago    Exited (0) 7 minutes ago              boring_almeida
+5446832ea0be   alpine         "sleep 1000"             7 minutes ago    Up 7 minutes                          dreamy_noether
+15ac45dc7dd1   nginx:alpine   "/docker-entrypoint.…"   7 minutes ago    Up 7 minutes                80/tcp    nginx-2
+afc3e5578686   nginx:alpine   "/docker-entrypoint.…"   7 minutes ago    Up 7 minutes                80/tcp    nginx-1
+0a71c0c6623b   ubuntu         "sleep 1000"             8 minutes ago    Up 7 minutes                          awesome_northcut
+29ef234217b5   redis          "docker-entrypoint.s…"   10 minutes ago   Exited (0) 10 minutes ago             wonderful_cartwright
+$ 
+
+=====================================================================================================
+
+Delete all containers from the Docker Host.
+Both Running and Not Running ones. Remember you may have to stop containers before deleting them.
+
+
+
+$ docker stop af6ff5c314a1 5446832ea0 15ac45dc7 afc3e5578 0a71c0c662 29ef234217
+af6ff5c314a1
+5446832ea0
+15ac45dc7
+afc3e5578
+0a71c0c662
+29ef234217
+$ docker rm  af6ff5c314a1 5446832ea0 15ac45dc7 afc3e5578 0a71c0c662 29ef234217
+af6ff5c314a1
+5446832ea0
+15ac45dc7
+afc3e5578
+0a71c0c662
+29ef234217
+$ 
+
+=============================================================================================
+
+Delete the ubuntu Image.
+
+
+$ docker rmi ubuntu
+Untagged: ubuntu:latest
+Untagged: ubuntu@sha256:67211c14fa74f070d27cc59d69a7fa9aeff8e28ea118ef3babc295a0428a6d21
+Deleted: sha256:08d22c0ceb150ddeb2237c5fa3129c0183f3cc6f5eeb2e7aa4016da3ad02140a
+Deleted: sha256:b93c1bd012ab8fda60f5b4f5906bf244586e0e3292d84571d3abb56472248466
+$ 
+
+===================================================================================================
+
+You are required to pull a docker image which will be used to run a container later. Pull the image nginx:1.14-alpine
+
+
+
+$ docker pull nginx:1.14-alpine
+1.14-alpine: Pulling from library/nginx
+bdf0201b3a05: Pull complete 
+3d0a573c81ed: Pull complete 
+8129faeb2eb6: Pull complete 
+3dc99f571daf: Pull complete 
+Digest: sha256:485b610fefec7ff6c463ced9623314a04ed67e3945b9c08d7e53a47f6d108dc7
+Status: Downloaded newer image for nginx:1.14-alpine
+docker.io/library/nginx:1.14-alpine
+$ 
+
+======================================================================================================
+
+Run a container with the nginx:1.14-alpine image and name it webapp
+
+
+
+$ docker run --name webapp nginx:1.14-alpine
+
+======================================================================================================
+Cleanup: Delete all images on the host
+
+
+Remove containers as necessary
+
+
+$ docker rmi redis mysql nginx  postgres nginx postgres alpine  alpine MB nginx kodekloud/simple-webapp-mysql 
